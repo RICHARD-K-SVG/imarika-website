@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Imarika Pre-Primary School</title>
+  <link rel="icon" href="assets/Sise.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Primary">
+      <a href="index.html" class="logo">
+        <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
+        Imarika Pre-Primary School
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="btn-apply" onclick="window.location.href='admissions.html'">Apply Now</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <h1>Gallery</h1>
+        <p><!-- PLACEHOLDER images below; real school photos to replace within 30 days of launch --></p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="assets/images/gallery/Rich.png" alt="Classroom activity — placeholder photo"></div>
+          <div class="gallery-item"><img src="assets/images/gallery/Rich1.png" alt="Outdoor play — placeholder photo"></div>
+          <div class="gallery-item"><img src="assets/images/gallery/Rich2.png" alt="School event — placeholder photo"></div>
+          <div class="gallery-item"><img src="assets/images/gallery/Rich3.png" alt="Arts and crafts — placeholder photo"></div>
+          <div class="gallery-item"><img src="assets/images/gallery/graduation-1.jpg" alt="Graduation — placeholder photo"></div>
+          <div class="gallery-item"><img src="assets/images/gallery/story-time-1.jpg" alt="Story time — placeholder photo"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" role="dialog" aria-label="Enlarged photo">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="">
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo"><img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">Imarika Pre-Primary School</div>
+        <p>P.O. Box 1247 Iyumbu-Dodoma<br> 
+           +255 652 899 596/ +255 787 276 070/ +255 764 527 179
+            imarikapreprimaryschool@gmail.com</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="container footer-copy">&copy; <span id="year"></span> Imarika Pre-Primary School. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs | Imarika School</title>
+  <link rel="icon" href="assets/Sise.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Primary">
+      <a href="index.html" class="logo">
+        <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
+        Imarika Pre-Primary School
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html" aria-current="page">Programs</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="btn-apply" onclick="window.location.href='admissions.html'">Apply Now</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <h1>Our Programs</h1>
+        <p>Seven grade levels across two stages, each designed around how children learn best at that age.</p>
+
+        <div class="tabs" role="tablist" aria-label="Programs">
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="pre-primary" id="tab-pre-primary">Pre-Primary</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="primary" id="tab-primary">Primary</button>
+        </div>
+
+        <div id="pre-primary" class="tab-panel active" role="tabpanel" aria-labelledby="tab-pre-primary">
+          <div class="grid">
+            <div class="col-4 card grade-card">
+              <h3>Playgroup</h3>
+              <p>Age range is 3-5 years</p>
+            </div>
+            <div class="col-4 card grade-card">
+              <h3>PP1</h3>
+              <p>Age range is 5-6 years</p>
+            </div>
+            <div class="col-4 card grade-card">
+              <h3>PP2</h3>
+              <p>Age range is 6-7 years</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="primary" class="tab-panel" role="tabpanel" aria-labelledby="tab-primary">
+          <div class="grid">
+            <div class="col-4 card grade-card">
+              <h3>Standard 1</h3>
+              <p>Age range is 7-8 years</p>
+            </div>
+            <div class="col-4 card grade-card">
+              <h3>Standard 2</h3>
+              <p>Age range is 8-9 years</p>
+            </div>
+            <div class="col-4 card grade-card">
+              <h3>Standard 3</h3>
+              <p>Age range is 9-10 years</p>
+            </div>
+            <div class="col-4 card grade-card">
+              <h3>Standard 4</h3>
+              <p>Age range is 10-11 years</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo"><img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">Imarika Pre-Primary School</div>
+        <p>P.O. Box 1247 Iyumbu-Dodoma<br> 
+           +255 652 899 596/ +255 787 276 070/ +255 764 527 179
+            imarikapreprimaryschool@gmail.com</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="container footer-copy">&copy; <span id="year"></span> Imarika School. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imarika Pre-Primary School | Home</title>
+  <meta name="description" content="Imarika Pre-Primary School — nurturing learners from Playgroup through Standard 4.">
+  <link rel="icon" href="assets/Sise.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Primary">
+      <a href="index.html" class="logo">
+        <img src="assets/images/Sise.png" alt="Circular Tanzanian 60th anniversary emblem featuring the national flag, portraits of Tanzanian leaders, and the text MIAKA 60 YA MUUNGANO WA TANZANIA 1964–2024, with a green, yellow, black, and blue ribbon below">
+        <marquee behavior="scroll" direction="left">Imarika Pre-Primary School</marquee>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="btn-apply" onclick="window.location.href='admissions.html'">Apply Now</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-copy">
+          <h1><!-- PLACEHOLDER: real headline pending client copy -->Karibu Imarika Pre-Primary School! Mahali ambapo kila mtoto hukua kimwili na kiakili</h1>
+          <p class="tagline"><!-- PLACEHOLDER: real tagline pending client copy -->Kulea akili zenye udadisi kuanzia ngazi ya 'Playgroup' hadi Darasa la Nne.</p>
+          <div class="hero-ctas">
+            <a href="admissions.html" class="btn-primary">Apply now</a>
+            <a href="about.html" class="btn-secondary">Learn more</a>
+          </div>
+          <div class="seal-badge">
+            <span class="seal-est">ESTABLISHED</span>
+            <span class="seal-year"><!-- PLACEHOLDER: year pending client input -->2026</span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <img src="assets/images/Sise.png" alt="An open book with a sprout growing from it beneath a rising sun, illustrating a child's growth through learning" width="420" height="420">
+        </div>
+      </div>
+    </section>
+
+    <svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 20 C 240 60, 480 0, 720 20 C 960 40, 1200 0, 1440 20 L1440 60 L0 60 Z"></path>
+    </svg>
+
+    <section class="alt-bg">
+      <div class="container">
+        <div class="chapter-list">
+          <div class="chapter">
+            <span class="chapter-icon" aria-hidden="true">&#127890;</span>
+            <h3>Pre-Primary</h3>
+            <p>Playgroup, PP1 &amp; PP2 — play-based foundations for our youngest learners.</p>
+          </div>
+          <div class="chapter">
+            <span class="chapter-icon" aria-hidden="true">&#128218;</span>
+            <h3>Primary</h3>
+            <p>Standard 1-4 -Building strong academic and social skills.</p>
+          </div>
+          <div class="chapter">
+            <span class="chapter-icon" aria-hidden="true">&#9997;&#65039;</span>
+            <h3>Admissions</h3>
+            <p>A simple 4-step process to join the Imarika Pre-Primary School</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo"><img src="assets/images/Sise.png" alt="Circular Tanzanian 60th anniversary emblem featuring the national flag, portraits of Tanzanian leaders, and the text MIAKA 60 YA MUUNGANO WA TANZANIA 1964–2024, with a green, yellow, black, and blue ribbon below">Imarika Pre-Primary School</div>
+        <p><!-- PLACEHOLDER: address --> P.O. Box 1247 Iyumbu-Dodoma<br>
+            <!-- PLACEHOLDER: phone -->+255 652 899 596/ +255 787 276 070/ +255 764 527 179
+            <!-- PLACEHOLDER: email -->imarikapreprimaryschool@gmail.com</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="container footer-copy">&copy; <span id="year"></span> Imarika Pre-Primary School. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
