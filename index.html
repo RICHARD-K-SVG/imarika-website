@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imarika Pre-Primary School | Home</title>
+  <meta name="description" content="Imarika School — nurturing learners from Playgroup through Standard 4.">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lang-switcher.css">
+  <link rel="stylesheet" href="footer-icons.css">
+  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="visitor-counter.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav-wrap" aria-label="Primary">
+      <a href="index.html" class="logo">
+        <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
+        Imarika Pre-Primary School
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page" data-i18n="nav_home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="programs.html" data-i18n="nav_programs">Programs</a></li>
+        <li><a href="gallery.html" data-i18n="nav_gallery">Gallery</a></li>
+        <li><a href="news.html" data-i18n="nav_news">News</a></li>
+        <li><a href="admissions.html" data-i18n="nav_admissions">Admissions</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        <li><button class="btn-apply" data-i18n="nav_apply" onclick="window.location.href='admissions.html'">Apply Now</button></li>
+        <li>
+          <div class="lang-switcher" role="group" aria-label="Choose language">
+            <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+            <button class="lang-btn" data-lang="sw" aria-pressed="false">SW</button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-copy">
+          <h1 data-i18n="hero_headline"><!-- PLACEHOLDER: real headline pending client copy -->A place where every child thrives</h1>
+          <p class="tagline" data-i18n="hero_tagline"><!-- PLACEHOLDER: real tagline pending client copy -->Nurturing curious minds from Playgroup to Standard 4.</p>
+          <div class="hero-ctas">
+            <a href="admissions.html" class="btn-primary" data-i18n="cta_apply">Apply now</a>
+            <a href="about.html" class="btn-secondary" data-i18n="cta_learn_more">Learn more</a>
+          </div>
+          <div class="seal-badge">
+            <span class="seal-est" data-i18n="seal_established">ESTABLISHED</span>
+            <span class="seal-year"><!-- PLACEHOLDER: year pending client input -->2026</span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <img src="assets/images/Imarika.jpeg" alt="An open book with a sprout growing from it beneath a rising sun, illustrating a child's growth through learning" width="420" height="420">
+        </div>
+      </div>
+    </section>
+
+    <section class="slider-section">
+      <div class="container">
+        <div class="slider" data-autoplay="5000" role="region" aria-roledescription="carousel" aria-label="Photos of school life" tabindex="0">
+          <div class="slides">
+            <figure class="slide">
+              <img src="assets/images/gallery/Imarika1.jpg" alt="Children learning together in a classroom">
+              <figcaption data-i18n="slide_1">Learning together in our bright classrooms</figcaption>
+            </figure>
+            <figure class="slide">
+              <img src="assets/images/gallery/Imarika2.jpg" alt="Children playing outdoors" loading="lazy">
+              <figcaption data-i18n="slide_2">Playtime builds friendships and confidence</figcaption>
+            </figure>
+            <figure class="slide">
+              <img src="assets/images/gallery/Imarika3.jpg" alt="A school event" loading="lazy">
+              <figcaption data-i18n="slide_3">Celebrating every school event and achievement</figcaption>
+            </figure>
+            <figure class="slide">
+              <img src="assets/images/gallery/Imarika4.jpg" alt="Children doing arts and crafts" loading="lazy">
+              <figcaption data-i18n="slide_4">Creative minds at work in arts and crafts</figcaption>
+            </figure>
+          </div>
+          <button class="slider-btn prev" type="button" aria-label="Previous slide">&#8249;</button>
+          <button class="slider-btn next" type="button" aria-label="Next slide">&#8250;</button>
+          <div class="slider-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 20 C 240 60, 480 0, 720 20 C 960 40, 1200 0, 1440 20 L1440 60 L0 60 Z"></path>
+    </svg>
+
+    <section class="alt-bg">
+      <div class="container">
+        <div class="chapter-list">
+          <div class="chapter">
+            <span class="chapter-icon" aria-hidden="true">&#127793;</span>
+            <h3 data-i18n="chapter_preprimary_title">Pre-Primary</h3>
+            <p data-i18n="chapter_preprimary_desc">Playgroup, PP1 &amp; PP2, play-based foundations for our youngest learners.</p>
+          </div>
+          <div class="chapter">
+            <span class="chapter-icon" aria-hidden="true">&#128218;</span>
+            <h3 data-i18n="chapter_primary_title">Primary</h3>
+            <p data-i18n="chapter_primary_desc">Standard 1-4: Building strong academic and social skills.</p>
+          </div>
+          <div class="chapter">
+            <span class="chapter-icon" aria-hidden="true">&#9997;&#65039;</span>
+            <h3 data-i18n="chapter_admissions_title">Admissions</h3>
+            <p data-i18n="chapter_admissions_desc">A simple step process to join Imarika Pre-Primary School.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo"><img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">Imarika Pre-Primary School</div>
+        <ul class="footer-contact"> 
+          <li> <svg viewBox="0 0 24 24" aria-hidden="true">
+               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+               <circle cx="12" cy="10" r="3"/></svg> 
+               <span>P. O. Box 1247 Iyumbu-Dodoma</span> </li> 
+          <li> <svg viewBox="0 0 24 24" aria-hidden="true">
+               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 
+               <a href="tel:+255000000000">+255 652 899 596/ +255 787 276 070/ +255 764 527 179</a> </li> 
+          <li> <svg viewBox="0 0 24 24" aria-hidden="true">
+               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+               <polyline points="22,6 12,13 2,6"/></svg> 
+               <a href="mailto:imarikapreprimaryschool@gmail.com">imarikapreprimaryschool@gmail.com</a> </li> 
+        </ul>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="programs.html" data-i18n="nav_programs">Programs</a></li>
+        <li><a href="gallery.html" data-i18n="nav_gallery">Gallery</a></li>
+        <li><a href="news.html" data-i18n="nav_news">News</a></li>
+        <li><a href="admissions.html" data-i18n="nav_admissions">Admissions</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="container footer-stats">
+      <div class="visitor-counter" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="visitor-count" id="visitor-count">&mdash;</span>
+        <span class="visitor-label" data-i18n="visitors_label">Total visits</span>
+      </div>
+    </div>
+    <div class="container footer-copy">&copy; <span id="year"></span> <span data-i18n="footer_copyright">Imarika Pre-Primary School. All rights reserved.</span></div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="visitor-counter.js"></script>
+  <script src="slider.js"></script>
+  <script src="translations.js"></script>
+  <script src="lang.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment variables (PASSWORDS - NEVER upload these!)
+.env
+.env.local
+
+# Build output
+dist/
+build/
+
+# Log files
+*.log
+
+# Editor files
+.vscode/
+.idea/
+.DS_Store
+
+# MySQL data
+mysql/data/

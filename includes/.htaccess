@@ -1,0 +1,13 @@
+Require all denied 
+<Files "contact-handler.php"> 
+    Require all granted 
+</Files> 
+    <Files "admissions-handler.php"> 
+        Require all granted 
+    </Files> 
+        <Files "news-fetch.php"> 
+            Require all granted 
+        </Files>
+            <Files "visit-counter.php">
+                 Require all granted 
+                </Files>

@@ -1,0 +1,76 @@
+/* Admissions "Downloads" section — link this AFTER admissions.css.
+   Self-contained: it does not change any existing admissions styles. */
+
+.downloads-section { padding: var(--space-4) 0 0; }
+.downloads-head { margin-bottom: var(--space-3); }
+.downloads-head h2 { margin-bottom: var(--space-1); }
+.downloads-head p { color: var(--color-ink); }
+.downloads-head a { font-weight: 500; }
+
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.download-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  background: var(--color-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+.download-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-maroon);
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-1);
+}
+.download-icon svg,
+.download-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.download-icon svg { stroke: var(--color-white); }
+
+.download-card h3 { font-size: 19px; }
+.download-card p { font-size: var(--small-size); flex: 1; }
+.download-type {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-royal-blue);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: var(--space-1);
+  padding: 12px 16px;
+  border: 1px solid var(--color-maroon);
+  border-radius: var(--radius);
+  background: var(--color-white);
+  color: var(--color-maroon);
+  font-weight: 500;
+}
+.download-btn svg { width: 18px; height: 18px; stroke: currentColor; }
+.download-btn:hover { background: var(--color-maroon); color: var(--color-white); }
+
+@media (max-width: 768px) {
+  .download-grid { grid-template-columns: 1fr; }
+}

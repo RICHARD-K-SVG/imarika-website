@@ -1,0 +1,99 @@
+/* Admin panel — link this AFTER ../styles.css on every admin page */
+
+body { background: var(--color-paper); }
+
+.admin-header { background: var(--color-maroon); position: sticky; top: 0; z-index: 100; }
+.admin-header-inner {
+  max-width: 1100px; margin: 0 auto; padding: var(--space-2) var(--space-3);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
+}
+.admin-brand { display: flex; align-items: center; gap: 8px; color: var(--color-white); font-family: var(--font-heading); font-weight: 600; font-size: 20px; }
+.admin-brand img { height: 28px; width: 28px; }
+
+.admin-nav { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.admin-nav a { color: var(--color-white); font-size: var(--small-size); font-weight: 500; padding-bottom: 3px; }
+.admin-nav a:hover { color: var(--color-sky-blue); }
+.admin-logout { opacity: 0.85; }
+
+/* Active-page indicator — a gold underline below whichever section you're on,
+   matching the same treatment used on the public site's nav. */
+.admin-nav a[aria-current="page"] {
+  box-shadow: inset 0 -2px 0 var(--color-gold);
+}
+
+/* Mobile nav toggle (hamburger) — hidden on desktop, shown on small screens */
+.admin-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 26px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .admin-nav-toggle { display: block; }
+  .admin-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-maroon);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-2) var(--space-3);
+    display: none;
+    gap: var(--space-2);
+  }
+  .admin-nav.open { display: flex; }
+  .admin-nav a { padding: 6px 0; width: 100%; }
+}
+
+.admin-main { max-width: 1100px; margin: 0 auto; padding: var(--space-4) var(--space-3); }
+
+.admin-success { background: #e4f3e8; color: #1a7a3d; border-radius: 8px; padding: var(--space-2); margin-bottom: var(--space-3); }
+.admin-error   { background: #fbe4e2; color: #b3261e; border-radius: 8px; padding: var(--space-2); margin-bottom: var(--space-3); }
+
+/* Dashboard cards */
+.admin-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+@media (max-width: 768px) { .admin-cards { grid-template-columns: 1fr; } }
+.admin-card {
+  display: flex; flex-direction: column; gap: 4px; background: var(--color-white);
+  border: 1px solid var(--border-color); border-radius: var(--radius); padding: var(--space-3); text-align: center;
+}
+.admin-card-num { font-family: var(--font-heading); font-size: 36px; color: var(--color-maroon); font-weight: 600; }
+
+/* Tables */
+.admin-table-wrap { overflow-x: auto; background: var(--color-white); border: 1px solid var(--border-color); border-radius: var(--radius); }
+.admin-table { width: 100%; border-collapse: collapse; font-size: var(--small-size); }
+.admin-table th, .admin-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+.admin-table th { background: #FAF1E9; color: var(--color-maroon); font-weight: 600; white-space: nowrap; }
+.admin-table tr:last-child td { border-bottom: none; }
+
+.admin-inline-form { display: inline-flex; gap: 6px; align-items: center; margin: 2px 0; }
+.admin-inline-form select { padding: 6px 8px; border: 1px solid var(--border-color); border-radius: 6px; font: inherit; }
+
+.admin-btn-sm { font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-maroon); background: var(--color-white); color: var(--color-maroon); cursor: pointer; }
+.admin-btn-sm:hover { background: var(--color-maroon); color: var(--color-white); }
+.admin-btn-danger { border-color: #b3261e; color: #b3261e; }
+.admin-btn-danger:hover { background: #b3261e; color: var(--color-white); }
+
+/* Add-post form card */
+.admin-form-card { background: var(--color-white); border: 1px solid var(--border-color); border-radius: var(--radius); padding: var(--space-3); margin-bottom: var(--space-4); max-width: 640px; }
+.admin-form-card label { display: block; font-weight: 500; font-size: var(--small-size); margin: var(--space-2) 0 4px; }
+.admin-form-card input[type=text], .admin-form-card select, .admin-form-card textarea {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font: inherit;
+}
+.admin-form-card textarea { min-height: 80px; resize: vertical; }
+.admin-checkbox { display: flex; align-items: center; gap: 8px; font-weight: 400; }
+.admin-checkbox input { width: 18px; height: 18px; accent-color: var(--color-maroon); }
+.admin-form-card button { margin-top: var(--space-3); }
+
+/* Login page */
+.admin-login-body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.admin-login-card { background: var(--color-white); border: 1px solid var(--border-color); border-radius: var(--radius); padding: var(--space-4); width: 100%; max-width: 360px; }
+.admin-login-card h1 { text-align: center; margin-bottom: var(--space-3); }
+.admin-login-card label { display: block; font-weight: 500; font-size: var(--small-size); margin: var(--space-2) 0 4px; }
+.admin-login-card input { width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font: inherit; }
+.admin-login-card button { width: 100%; margin-top: var(--space-3); }
