@@ -16,9 +16,9 @@ if ($pdo !== null) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | Imarika Pre-Primary School Admin</title>
-  <link rel="icon" href="../assets/Sise.png">
+  <link rel="icon" type="image/png" href="../assets/images/Sise.png">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body>
   <?php require __DIR__ . '/includes/admin-nav.php'; ?>
@@ -31,5 +31,6 @@ if ($pdo !== null) {
       <a class="admin-card" href="contact.php"><span class="admin-card-num"><?= $counts['messages'] ?></span><span>Contact Messages</span></a>
     </div>
   </main>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

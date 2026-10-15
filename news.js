@@ -4,6 +4,7 @@
 // ==========================================================================
 
 let allPosts = [];
+let returnFocusElement = null;
 
 document.addEventListener('DOMContentLoaded', loadNews);
 
@@ -20,7 +21,7 @@ async function loadNews() {
     initFilters();
     initModal();
   } catch (err) {
-    grid.innerHTML = '<p class="news-error">Could not load news right now. Please try again later.</p>';
+    grid.innerHTML = '<div class="news-error"><p>News updates are temporarily unavailable. Please check back later or contact the school.</p><a href="contact.html">Contact Imarika</a></div>';
   }
 }
 
@@ -57,9 +58,9 @@ function renderGrid(filter) {
     .map(
       (p) => `
     <article class="news-card">
-      <span class="news-badge ${p.category.toLowerCase()}">${escapeHtml(p.category)}</span>
+      <span class="news-badge ${categoryClass(p.category)}">${escapeHtml(p.category)}</span>
       <h3>${escapeHtml(p.title)}</h3>
-      <time datetime="${p.created_at}">${formatDate(p.created_at)}</time>
+      <time datetime="${escapeHtml(p.created_at)}">${formatDate(p.created_at)}</time>
       <p>${escapeHtml(p.snippet)}</p>
       <button class="btn-secondary read-more" data-id="${p.id}">Read more</button>
     </article>
@@ -78,6 +79,7 @@ function openModal(id) {
   if (!post) return;
 
   const modal = document.getElementById('news-modal') || document.querySelector('.news-modal');
+  returnFocusElement = document.activeElement;
   document.getElementById('modal-badge').textContent = post.category;
   document.getElementById('modal-badge').className = 'news-badge ' + post.category.toLowerCase().replace(/\s+/g, '-');
   document.getElementById('modal-title').textContent = post.title;
@@ -86,6 +88,8 @@ function openModal(id) {
   document.getElementById('modal-content').textContent = post.content && post.content.trim() !== '' ? post.content : post.snippet;
 
   modal.hidden = false;
+  modal.setAttribute('aria-hidden', 'false');
+  modal.querySelector('.news-modal-close').focus();
 }
 
 function initModal() {
@@ -93,22 +97,38 @@ function initModal() {
   if (!modal) return;
   const closeBtn = modal.querySelector('.news-modal-close');
 
-  function close() { modal.hidden = true; }
+  function close() {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    if (returnFocusElement) returnFocusElement.focus();
+  }
 
   closeBtn.addEventListener('click', close);
+  modal.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      closeBtn.focus();
+    }
+  });
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
 }
 
 function initFilters() {
   const tabs = document.querySelectorAll('.filter-tab');
+  const filterGroup = document.querySelector('.filter-tabs');
+  if (filterGroup) filterGroup.hidden = false;
   tabs.forEach((btn) => {
     btn.addEventListener('click', () => {
-      tabs.forEach((b) => b.setAttribute('aria-selected', 'false'));
-      btn.setAttribute('aria-selected', 'true');
+      tabs.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
       renderGrid(btn.dataset.filter);
     });
   });
+}
+
+function categoryClass(category) {
+  return String(category || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
 function escapeHtml(str) {

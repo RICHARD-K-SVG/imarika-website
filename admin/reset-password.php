@@ -38,9 +38,9 @@ if (!$isValid) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reset Password | Imarika Admin</title>
-  <link rel="icon" href="../assets/Sise.png">
+  <link rel="icon" type="image/png" href="../assets/images/Sise.png">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">
@@ -64,5 +64,6 @@ if (!$isValid) {
       </form>
     <?php endif; ?>
   </div>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

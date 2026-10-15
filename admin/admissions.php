@@ -46,7 +46,7 @@ $rows = $pdo !== null ? $pdo->query('SELECT * FROM admissions ORDER BY submitted
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admissions | Imarika Admin</title>
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body>
   <?php require __DIR__ . '/includes/admin-nav.php'; ?>
@@ -75,8 +75,13 @@ $rows = $pdo !== null ? $pdo->query('SELECT * FROM admissions ORDER BY submitted
             <td><?= htmlspecialchars($r['phone']) ?></td>
             <td><?= htmlspecialchars($r['email'] ?: '—') ?></td>
             <td>
-              <a href="view-upload.php?file=<?= urlencode(basename($r['birth_certificate_path'])) ?>" target="_blank">Birth Cert.</a><br>
-              <a href="view-upload.php?file=<?= urlencode(basename($r['student_photo_path'])) ?>" target="_blank">Photo</a>
+              <?php if (!empty($r['birth_certificate_path'])): ?>
+                <a href="view-upload.php?file=<?= urlencode(basename($r['birth_certificate_path'])) ?>" target="_blank">Birth Cert.</a><br>
+              <?php endif; ?>
+              <?php if (!empty($r['student_photo_path'])): ?>
+                <a href="view-upload.php?file=<?= urlencode(basename($r['student_photo_path'])) ?>" target="_blank">Photo</a>
+              <?php endif; ?>
+              <?php if (empty($r['birth_certificate_path']) && empty($r['student_photo_path'])): ?>Not provided<?php endif; ?>
             </td>
             <td><?= htmlspecialchars($r['submitted_at']) ?></td>
             <td>
@@ -103,5 +108,6 @@ $rows = $pdo !== null ? $pdo->query('SELECT * FROM admissions ORDER BY submitted
     </div>
     <?php endif; ?>
   </main>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

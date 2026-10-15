@@ -9,8 +9,8 @@ function navActive(string $file, string $current): string {
 <header class="admin-header">
   <div class="admin-header-inner">
     <span class="admin-brand"><img src="../assets/images/Sise.png" alt="Imarika Pre-Primary School logo">Imarika Pre-Primary School Admin</span>
-    <button class="admin-nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-    <nav class="admin-nav">
+    <button class="admin-nav-toggle" type="button" aria-label="Toggle admin menu" aria-expanded="false" aria-controls="admin-navigation">&#9776;</button>
+    <nav class="admin-nav" id="admin-navigation" aria-label="Admin">
       <a href="dashboard.php"<?= navActive('dashboard.php', $currentPage) ?>>Dashboard</a>
       <a href="admissions.php"<?= navActive('admissions.php', $currentPage) ?>>Admissions</a>
       <a href="news.php"<?= ($currentPage === 'news.php' || $currentPage === 'news-edit.php') ? ' aria-current="page"' : '' ?>>News</a>

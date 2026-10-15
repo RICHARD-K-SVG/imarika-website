@@ -6,6 +6,7 @@
  */
 require __DIR__ . '/../includes/db-config.php';
 require __DIR__ . '/../includes/vendor/autoload.php';
+require __DIR__ . '/../includes/mail-config.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -24,38 +25,37 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null) {
     $message = 'If that account exists and has a registered email, a reset link has been sent to it.';
 
     if ($admin && !empty($admin['email'])) {
+      $mailConfig = getSchoolMailConfig();
+      $baseUrl = trim((string) getenv('IMARIKA_BASE_URL'));
+
+      if ($mailConfig === null || filter_var($baseUrl, FILTER_VALIDATE_URL) === false) {
+        error_log('Password reset: mail settings or IMARIKA_BASE_URL are not configured.');
+      } else {
         $token = bin2hex(random_bytes(32));
-        $expires = date('Y-m-d H:i:s', time() + 3600); // valid for 1 hour
+        $expires = date('Y-m-d H:i:s', time() + 3600);
         $pdo->prepare('UPDATE admin_users SET reset_token = :t, reset_expires = :e WHERE id = :id')
-            ->execute(['t' => $token, 'e' => $expires, 'id' => $admin['id']]);
+          ->execute(['t' => $token, 'e' => $expires, 'id' => $admin['id']]);
 
-        // Adjust this base URL once this is on real hosting instead of localhost.
-        $resetLink = 'http://localhost/imarika-website/admin/reset-password.php?token=' . $token;
-
-        // Copy your real SMTP values from contact-handler.php
-        $SMTP_HOST = 'sandbox.smtp.mailtrap.io';
-        $SMTP_USERNAME = '0e658f9e03b9b2';
-        $SMTP_PASSWORD = 'a4e9ecd10d1de6';
-        $SMTP_PORT = 587;
-
+        $resetLink = rtrim($baseUrl, '/') . '/admin/reset-password.php?token=' . $token;
         $mail = new PHPMailer(true);
         try {
-            $mail->isSMTP();
-            $mail->Host = $SMTP_HOST;
-            $mail->SMTPAuth = true;
-            $mail->Username = $SMTP_USERNAME;
-            $mail->Password = $SMTP_PASSWORD;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = $SMTP_PORT;
-            $mail->setFrom('noreply@imarikaschool.example', 'Imarika School Admin');
-            $mail->addAddress($admin['email']);
-            $mail->Subject = 'Admin Password Reset Request';
-            $mail->Body = "Someone requested a password reset for the Imarika School admin panel.\n\n"
-                . "If this was you, click the link below within the next hour:\n{$resetLink}\n\n"
-                . "If you didn't request this, you can ignore this email.";
-            $mail->send();
+          $mail->isSMTP();
+          $mail->Host = $mailConfig['host'];
+          $mail->SMTPAuth = true;
+          $mail->Username = $mailConfig['username'];
+          $mail->Password = $mailConfig['password'];
+          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+          $mail->Port = $mailConfig['port'];
+          $mail->setFrom($mailConfig['from_email'], 'Imarika School Admin');
+          $mail->addAddress($admin['email']);
+          $mail->Subject = 'Admin Password Reset Request';
+          $mail->Body = "Someone requested a password reset for the Imarika School admin panel.\n\n"
+            . "If this was you, click the link below within the next hour:\n{$resetLink}\n\n"
+            . "If you didn't request this, you can ignore this email.";
+          $mail->send();
         } catch (Exception $e) {
-            error_log('Password reset email failed: ' . $mail->ErrorInfo);
+          error_log('Password reset email failed: ' . $mail->ErrorInfo);
+        }
         }
     }
 }
@@ -66,9 +66,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forgot Password | Imarika Admin</title>
-  <link rel="icon" href="../assets/Sise.png">
+  <link rel="icon" type="image/png" href="../assets/images/Sise.png">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">
@@ -83,5 +83,6 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null) {
     </form>
     <p style="text-align:center;margin-top:var(--space-2)"><a href="login.php">Back to login</a></p>
   </div>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

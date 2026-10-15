@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Imarika Pre-Primary School | Home</title>
   <meta name="description" content="Imarika School — nurturing learners from Playgroup through Standard 4.">
-  <link rel="icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/png" href="assets/images/Sise.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="lang-switcher.css">
-  <link rel="stylesheet" href="footer-icons.css">
   <link rel="stylesheet" href="slider.css">
   <link rel="stylesheet" href="visitor-counter.css">
 </head>
@@ -20,8 +19,8 @@
         <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
         Imarika Pre-Primary School
       </a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <ul class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="index.html" aria-current="page" data-i18n="nav_home">Home</a></li>
         <li><a href="about.html" data-i18n="nav_about">About</a></li>
         <li><a href="programs.html" data-i18n="nav_programs">Programs</a></li>
@@ -29,7 +28,7 @@
         <li><a href="news.html" data-i18n="nav_news">News</a></li>
         <li><a href="admissions.html" data-i18n="nav_admissions">Admissions</a></li>
         <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
-        <li><button class="btn-apply" data-i18n="nav_apply" onclick="window.location.href='admissions.html'">Apply Now</button></li>
+        <li><a class="btn-apply" href="admissions.html" data-i18n="nav_apply">Apply Now</a></li>
         <li>
           <div class="lang-switcher" role="group" aria-label="Choose language">
             <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
@@ -41,45 +40,105 @@
   </header>
 
   <main>
-    <section class="hero">
+    <!-- A direct welcome and one clear next step help families orient themselves immediately. -->
+    <section class="hero home-hero">
       <div class="container">
         <div class="hero-copy">
-          <h1 data-i18n="hero_headline"><!-- PLACEHOLDER: real headline pending client copy -->A place where every child thrives</h1>
-          <p class="tagline" data-i18n="hero_tagline"><!-- PLACEHOLDER: real tagline pending client copy -->Nurturing curious minds from Playgroup to Standard 4.</p>
+          <p class="home-eyebrow" data-i18n="home_eyebrow">A welcoming start in Iyumbu, Dodoma</p>
+          <h1 data-i18n="hero_headline">A place where every child thrives</h1>
+          <p class="tagline" data-i18n="hero_tagline">At Imarika Pre-Primary School, children learn, play and grow from Playgroup to Standard 4. We build strong foundations through caring guidance, curiosity and respect.</p>
           <div class="hero-ctas">
-            <a href="admissions.html" class="btn-primary" data-i18n="cta_apply">Apply now</a>
-            <a href="about.html" class="btn-secondary" data-i18n="cta_learn_more">Learn more</a>
+            <a href="admissions.html" class="btn-primary" data-i18n="cta_apply">Explore admissions</a>
+            <a href="programs.html" class="btn-secondary" data-i18n="cta_programs">Explore programs</a>
           </div>
-          <div class="seal-badge">
-            <span class="seal-est" data-i18n="seal_established">ESTABLISHED</span>
-            <span class="seal-year"><!-- PLACEHOLDER: year pending client input -->2026</span>
-          </div>
+          <p class="hero-location">
+            <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M20 10c0 5.25-8 12-8 12S4 15.25 4 10a8 8 0 1 1 16 0Z"/>
+              <circle cx="12" cy="10" r="2.5"/>
+            </svg>
+            <span data-i18n="home_location">Iyumbu, Dodoma, Tanzania</span>
+          </p>
         </div>
         <div class="hero-art">
-          <img src="assets/images/Imarika.jpeg" alt="An open book with a sprout growing from it beneath a rising sun, illustrating a child's growth through learning" width="420" height="420">
+          <img src="assets/images/gallery/Imarika1.jpg" alt="Learners taking part in a classroom activity at Imarika" width="640" height="480" fetchpriority="high">
+          <p class="image-note" data-i18n="hero_image_note">Curious minds. Caring guidance. Room to grow.</p>
         </div>
       </div>
     </section>
 
-    <section class="slider-section">
+    <!-- The school story sits apart from the photo carousel so the page feels organized, not media-heavy. -->
+    <section class="home-about">
+      <div class="container home-about-grid">
+        <div class="home-about-image">
+          <img src="assets/images/gallery/Imarika3.jpg" alt="A learner concentrating on a classroom puzzle activity" width="640" height="480" loading="lazy">
+          <span class="image-caption" data-i18n="about_image_note">Growing together, every day</span>
+        </div>
+        <div class="home-about-copy">
+          <p class="home-eyebrow" data-i18n="about_eyebrow">Who we are</p>
+          <h2 data-i18n="about_title">A strong beginning, built together</h2>
+          <p data-i18n="about_intro">Imarika Pre-Primary School is a learning community in Iyumbu, Dodoma, serving children from Playgroup through Standard 4. We bring early learning and primary education together in a supportive environment where every child can build confidence and a love of learning.</p>
+          <ul class="home-values">
+            <li data-i18n="about_value_1">Learning through curiosity, practice and play</li>
+            <li data-i18n="about_value_2">Care, respect and encouragement for every learner</li>
+            <li data-i18n="about_value_3">Strong foundations in academic and social skills</li>
+          </ul>
+          <a href="about.html" class="btn-primary home-about-cta" data-i18n="about_link">Get to know Imarika <span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-programs alt-bg">
       <div class="container">
+        <div class="section-heading">
+          <p class="home-eyebrow" data-i18n="programs_eyebrow">Learning at every stage</p>
+          <h2 data-i18n="programs_title">Room to learn, step by step</h2>
+          <p data-i18n="programs_intro">Our programs meet children where they are and help them grow into their next stage with confidence.</p>
+        </div>
+        <div class="chapter-list">
+          <article class="chapter">
+            <span class="chapter-number" aria-hidden="true">01</span>
+            <h3 data-i18n="chapter_preprimary_title">Pre-Primary</h3>
+            <p data-i18n="chapter_preprimary_desc">Playgroup, PP1 &amp; PP2: playful foundations for our youngest learners.</p>
+            <a href="programs.html" class="text-link" data-i18n="programs_link">Discover the program <span aria-hidden="true">&#8594;</span></a>
+          </article>
+          <article class="chapter">
+            <span class="chapter-number" aria-hidden="true">02</span>
+            <h3 data-i18n="chapter_primary_title">Primary</h3>
+            <p data-i18n="chapter_primary_desc">Standard 1-4: building strong academic, creative and social skills.</p>
+            <a href="programs.html" class="text-link" data-i18n="programs_link">Discover the program <span aria-hidden="true">&#8594;</span></a>
+          </article>
+          <article class="chapter">
+            <span class="chapter-number" aria-hidden="true">03</span>
+            <h3 data-i18n="chapter_admissions_title">Admissions</h3>
+            <p data-i18n="chapter_admissions_desc">Find the information your family needs to take the next step.</p>
+            <a href="admissions.html" class="text-link" data-i18n="admissions_link">How to join <span aria-hidden="true">&#8594;</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-life">
+      <div class="container">
+        <div class="section-heading section-heading-inline">
+          <div>
+            <p class="home-eyebrow" data-i18n="life_eyebrow">A glimpse of school life</p>
+            <h2 data-i18n="life_title">Learning happens in many ways</h2>
+          </div>
+          <a href="gallery.html" class="btn-primary home-gallery-cta" data-i18n="life_link">See the full gallery <span aria-hidden="true">&#8594;</span></a>
+        </div>
         <div class="slider" data-autoplay="5000" role="region" aria-roledescription="carousel" aria-label="Photos of school life" tabindex="0">
           <div class="slides">
             <figure class="slide">
-              <img src="assets/images/gallery/Imarika1.jpg" alt="Children learning together in a classroom">
-              <figcaption data-i18n="slide_1">Learning together in our bright classrooms</figcaption>
+              <img src="assets/images/gallery/Imarika4.jpg" alt="A young learner smiling during a classroom activity" loading="lazy">
+              <figcaption data-i18n="home_photo_1">Encouragement in the classroom</figcaption>
             </figure>
             <figure class="slide">
-              <img src="assets/images/gallery/Imarika2.jpg" alt="Children playing outdoors" loading="lazy">
-              <figcaption data-i18n="slide_2">Playtime builds friendships and confidence</figcaption>
+              <img src="assets/images/gallery/Imarika5.jpg" alt="A learner smiling in the classroom" loading="lazy">
+              <figcaption data-i18n="home_photo_2">Confident young learners</figcaption>
             </figure>
             <figure class="slide">
-              <img src="assets/images/gallery/Imarika3.jpg" alt="A school event" loading="lazy">
-              <figcaption data-i18n="slide_3">Celebrating every school event and achievement</figcaption>
-            </figure>
-            <figure class="slide">
-              <img src="assets/images/gallery/Imarika4.jpg" alt="Children doing arts and crafts" loading="lazy">
-              <figcaption data-i18n="slide_4">Creative minds at work in arts and crafts</figcaption>
+              <img src="assets/images/gallery/Imarika6.jpg" alt="Students learning together at their desks" loading="lazy">
+              <figcaption data-i18n="home_photo_3">Learning alongside friends</figcaption>
             </figure>
           </div>
           <button class="slider-btn prev" type="button" aria-label="Previous slide">&#8249;</button>
@@ -89,28 +148,16 @@
       </div>
     </section>
 
-    <svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 20 C 240 60, 480 0, 720 20 C 960 40, 1200 0, 1440 20 L1440 60 L0 60 Z"></path>
-    </svg>
-
-    <section class="alt-bg">
-      <div class="container">
-        <div class="chapter-list">
-          <div class="chapter">
-            <span class="chapter-icon" aria-hidden="true">&#127793;</span>
-            <h3 data-i18n="chapter_preprimary_title">Pre-Primary</h3>
-            <p data-i18n="chapter_preprimary_desc">Playgroup, PP1 &amp; PP2, play-based foundations for our youngest learners.</p>
-          </div>
-          <div class="chapter">
-            <span class="chapter-icon" aria-hidden="true">&#128218;</span>
-            <h3 data-i18n="chapter_primary_title">Primary</h3>
-            <p data-i18n="chapter_primary_desc">Standard 1-4: Building strong academic and social skills.</p>
-          </div>
-          <div class="chapter">
-            <span class="chapter-icon" aria-hidden="true">&#9997;&#65039;</span>
-            <h3 data-i18n="chapter_admissions_title">Admissions</h3>
-            <p data-i18n="chapter_admissions_desc">A simple step process to join Imarika Pre-Primary School.</p>
-          </div>
+    <section class="home-visit">
+      <div class="container home-visit-inner">
+        <div>
+          <p class="home-eyebrow" data-i18n="visit_eyebrow">Your family is welcome here</p>
+          <h2 data-i18n="visit_title">Take the next step with Imarika</h2>
+          <p data-i18n="visit_copy">Find us in Iyumbu, Dodoma. Explore our admissions information or get in touch with our team to learn more about joining the school community.</p>
+        </div>
+        <div class="visit-actions">
+          <a href="admissions.html" class="btn-primary" data-i18n="cta_apply">Explore admissions</a>
+          <a href="contact.html" class="btn-secondary" data-i18n="contact_link">Contact the school</a>
         </div>
       </div>
     </section>
@@ -127,7 +174,7 @@
                <span>P. O. Box 1247 Iyumbu-Dodoma</span> </li> 
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 
-               <a href="tel:+255000000000">+255 652 899 596/ +255 787 276 070/ +255 764 527 179</a> </li> 
+               <span><a href="tel:+255652899596">+255 652 899 596</a> / <a href="tel:+255787276070">+255 787 276 070</a> / <a href="tel:+255764527179">+255 764 527 179</a></span> </li>
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                <polyline points="22,6 12,13 2,6"/></svg> 

@@ -15,6 +15,7 @@ header('Content-Type: application/json');
 
 require __DIR__ . '/vendor/autoload.php'; // PHPMailer, via Composer — see vendor/README.md
 require __DIR__ . '/db-config.php';
+require __DIR__ . '/mail-config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -48,29 +49,45 @@ if (strlen($name) > 200 || strlen($email) > 200 || strlen($message) > 5000) {
     respond(false, 'Submission too long.');
 }
 
-// ---- PLACEHOLDER: school's receiving email + SMTP credentials ----
-// Update these once hosting/email is confirmed (Section 7, Open Action Items).
-$SCHOOL_RECEIVING_EMAIL = 'richard2002kikoti@gmail.com';
-$SMTP_HOST = 'sandbox.smtp.mailtrap.io';
-$SMTP_USERNAME = '0e658f9e03b9b2';
-$SMTP_PASSWORD = 'a4e9ecd10d1de6';
-$SMTP_PORT = 587;
+$pdo = getDbConnection();
+if ($pdo === null) {
+    error_log('Contact form: database is not configured or unavailable.');
+    http_response_code(503);
+    respond(false, 'We could not save your message right now. Please try again or contact the school by phone.');
+}
+
+try {
+    $stmt = $pdo->prepare(
+        'INSERT INTO inquiries (name, email, message) VALUES (:name, :email, :message)'
+    );
+    $stmt->execute(['name' => $name, 'email' => $email, 'message' => $message]);
+} catch (PDOException $e) {
+    error_log('Contact form database insert failed: ' . $e->getMessage());
+    http_response_code(503);
+    respond(false, 'We could not save your message right now. Please try again or contact the school by phone.');
+}
+
+$mailConfig = getSchoolMailConfig();
+if ($mailConfig === null) {
+    error_log('Contact form: SMTP notification is not configured; message was saved.');
+    respond(true, 'Your message has been received and saved.');
+}
 
 $mail = new PHPMailer(true);
 
 try {
     // Server settings
     $mail->isSMTP();
-    $mail->Host       = $SMTP_HOST;
+    $mail->Host       = $mailConfig['host'];
     $mail->SMTPAuth   = true;
-    $mail->Username   = $SMTP_USERNAME;
-    $mail->Password   = $SMTP_PASSWORD;
+    $mail->Username   = $mailConfig['username'];
+    $mail->Password   = $mailConfig['password'];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = $SMTP_PORT;
+    $mail->Port       = $mailConfig['port'];
 
     // Recipients
-    $mail->setFrom($SCHOOL_RECEIVING_EMAIL, 'Imarika School Pre-Primary School Website');
-    $mail->addAddress($SCHOOL_RECEIVING_EMAIL);
+    $mail->setFrom($mailConfig['from_email'], 'Imarika Pre-Primary School');
+    $mail->addAddress($mailConfig['school_email']);
     $mail->addReplyTo($email, $name);
 
     // Content
@@ -86,22 +103,8 @@ try {
 
     $mail->send();
 
-    // ---- Optional: also store in MySQL (safe no-op if DB not configured) ----
-    $pdo = getDbConnection();
-    if ($pdo !== null) {
-        try {
-            $stmt = $pdo->prepare(
-                'INSERT INTO inquiries (name, email, message) VALUES (:name, :email, :message)'
-            );
-            $stmt->execute(['name' => $name, 'email' => $email, 'message' => $message]);
-        } catch (PDOException $e) {
-            // Log but don't fail the request — the email already sent successfully.
-            error_log('DB insert failed: ' . $e->getMessage());
-        }
-    }
-
-    respond(true, 'Message sent successfully.');
+    respond(true, 'Your message has been received and saved.');
 } catch (Exception $e) {
     error_log('Mailer Error: ' . $mail->ErrorInfo);
-    respond(false, 'DEBUG: ' . $mail->ErrorInfo);
+    respond(true, 'Your message has been received and saved.');
 }

@@ -48,7 +48,7 @@
   place-items: center;
   z-index: 2;
 }
-.slider-btn:hover { background: var(--color-gold); color: var(--color-ink); }
+.slider-btn:hover { background: var(--color-maroon); color: var(--color-white); }
 .slider-btn.prev { left: var(--space-2); }
 .slider-btn.next { right: var(--space-2); }
 
@@ -79,6 +79,8 @@
   .slider-btn.next { right: var(--space-1); }
 }
 
+.slider-toggle { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); }
+
 /* Pause / Play button */
 .slider-toggle {
   position: absolute;
@@ -96,4 +98,4 @@
   place-items: center;
   z-index: 2;
 }
-.slider-toggle:hover { background: var(--color-gold); color: var(--color-ink); }
+.slider-toggle:hover { background: var(--color-maroon); color: var(--color-white); }

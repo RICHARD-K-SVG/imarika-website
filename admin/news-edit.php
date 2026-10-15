@@ -41,9 +41,9 @@ if (!$post) { header('Location: news.php'); exit; }
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Post | Imarika Admin</title>
-  <link rel="icon" href="../assets/Sise.png">
+  <link rel="icon" type="image/png" href="../assets/images/Sise.png">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body>
   <?php require __DIR__ . '/includes/admin-nav.php'; ?>
@@ -78,5 +78,6 @@ if (!$post) { header('Location: news.php'); exit; }
     </div>
     <a href="news.php">&larr; Back to all posts</a>
   </main>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

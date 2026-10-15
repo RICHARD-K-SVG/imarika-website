@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | Imarika Pre-Primary School</title>
-  <link rel="icon" href="assets/Sise.png">
+  <meta name="description" content="See everyday learning and school moments at Imarika Pre-Primary School in Iyumbu, Dodoma.">
+  <link rel="icon" type="image/png" href="assets/images/Sise.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="gallery-lightbox.css">
   <link rel="stylesheet" href="lang-switcher.css">
-  <link rel="stylesheet" href="footer-icons.css">
   <link rel="stylesheet" href="visitor-counter.css">
 </head>
 <body>
@@ -19,8 +19,8 @@
         <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
         Imarika Pre-Primary School
       </a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <ul class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="index.html" data-i18n="nav_home">Home</a></li>
         <li><a href="about.html" data-i18n="nav_about">About</a></li>
         <li><a href="programs.html" data-i18n="nav_programs">Programs</a></li>
@@ -28,7 +28,7 @@
         <li><a href="news.html" data-i18n="nav_news">News</a></li>
         <li><a href="admissions.html" data-i18n="nav_admissions">Admissions</a></li>
         <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
-        <li><button class="btn-apply" onclick="window.location.href='admissions.html'">Apply Now</button></li>
+        <li><a class="btn-apply" href="admissions.html" data-i18n="nav_apply">Apply Now</a></li>
         <li>
           <div class="lang-switcher" role="group" aria-label="Choose language">
             <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
@@ -40,27 +40,63 @@
   </header>
 
   <main>
-    <section>
-      <div class="container">
-        <h1 data-i18n="gallery_title">Gallery</h1>
-        <p data-i18n="gallery_description">Click any photo to view it full-size, then use the arrows to browse.</p><br>
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">Life at Imarika</p>
+        <h1>Small moments. Big steps in learning.</h1>
+        <p class="lede">A glimpse of the learners, classroom activities and everyday moments that make up our school community in Iyumbu, Dodoma.</p>
+      </div>
+    </section>
 
+    <section class="gallery-section">
+      <div class="container">
         <div class="gallery-grid">
-          <div class="gallery-item"><img src="assets/images/gallery/Imarika1.jpg" alt="Classroom activity — placeholder photo"></div>
-          <div class="gallery-item"><img src="assets/images/gallery/Imarika2.jpg" alt="Outdoor play — placeholder photo"></div>
-          <div class="gallery-item"><img src="assets/images/gallery/Imarika3.jpg" alt="School event — placeholder photo"></div>
-          <div class="gallery-item"><img src="assets/images/gallery/Imarika4.jpg" alt="Arts and crafts — placeholder photo"></div>
-          <div class="gallery-item"><img src="assets/images/gallery/Imarika5.jpg" alt="Graduation — placeholder photo"></div>
-          <div class="gallery-item"><img src="assets/images/gallery/Imarika6.jpg" alt="Story time — placeholder photo"></div>
+          <figure class="gallery-card">
+            <button class="gallery-item" type="button" aria-label="View photo: learners taking part in a classroom activity">
+              <img src="assets/images/gallery/Imarika1.jpg" alt="Learners taking part in a classroom activity" width="800" height="600" loading="lazy">
+            </button>
+            <figcaption>Learning together</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <button class="gallery-item" type="button" aria-label="View photo: a moment from school life">
+              <img src="assets/images/gallery/Imarika2.jpg" alt="Children sharing a moment at school" width="800" height="600" loading="lazy">
+            </button>
+            <figcaption>Growing in community</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <button class="gallery-item" type="button" aria-label="View photo: a learner working on a puzzle">
+              <img src="assets/images/gallery/Imarika3.jpg" alt="A learner concentrating on a classroom puzzle" width="800" height="600" loading="lazy">
+            </button>
+            <figcaption>Hands-on practice</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <button class="gallery-item" type="button" aria-label="View photo: a learner in the classroom">
+              <img src="assets/images/gallery/Imarika4.jpg" alt="A young learner smiling during a classroom activity" width="800" height="600" loading="lazy">
+            </button>
+            <figcaption>Encouragement in class</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <button class="gallery-item" type="button" aria-label="View photo: a learner at school">
+              <img src="assets/images/gallery/Imarika5.jpg" alt="A learner smiling at school" width="800" height="600" loading="lazy">
+            </button>
+            <figcaption>Confidence grows</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <button class="gallery-item" type="button" aria-label="View photo: students learning at their desks">
+              <img src="assets/images/gallery/Imarika6.jpg" alt="Students learning together at their desks" width="800" height="600" loading="lazy">
+            </button>
+            <figcaption>Learning alongside friends</figcaption>
+          </figure>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="lightbox" role="dialog" aria-label="Enlarged photo" aria-modal="true">
+  <div class="lightbox" role="dialog" aria-labelledby="lightbox-title" aria-modal="true" aria-hidden="true">
+    <h2 id="lightbox-title" class="visually-hidden">School photo</h2>
     <button class="lightbox-close" aria-label="Close">&times;</button>
     <button class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
-    <img src="" alt="">
+    <img alt="">
     <button class="lightbox-next" aria-label="Next photo">&#8250;</button>
   </div>
 
@@ -75,7 +111,7 @@
                <span data-i18n="footer_address">P. O. Box 1247 Iyumbu-Dodoma</span> </li> 
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 
-               <a href="tel:+255000000000">+255 652 899 596/ +255 787 276 070/ +255 764 527 179</a> </li> 
+               <span><a href="tel:+255652899596">+255 652 899 596</a> / <a href="tel:+255787276070">+255 787 276 070</a> / <a href="tel:+255764527179">+255 764 527 179</a></span> </li>
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                <polyline points="22,6 12,13 2,6"/></svg> 
@@ -98,7 +134,7 @@
         <span class="visitor-label" data-i18n="visitors_label">Total visits</span>
       </div>
     </div>
-    <div class="container footer-copy">&copy; <span id="year"></span> Imarika School. All rights reserved.</div>
+    <div class="container footer-copy">&copy; <span id="year"></span> Imarika Pre-Primary School. All rights reserved.</div>
   </footer>
    <script src="script.js"></script>
   <script src="visitor-counter.js"></script>

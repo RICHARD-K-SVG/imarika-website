@@ -19,7 +19,7 @@ $rows = $pdo !== null ? $pdo->query('SELECT * FROM inquiries ORDER BY submitted_
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Messages | Imarika Admin</title>
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body>
   <?php require __DIR__ . '/includes/admin-nav.php'; ?>
@@ -52,5 +52,6 @@ $rows = $pdo !== null ? $pdo->query('SELECT * FROM inquiries ORDER BY submitted_
     </div>
     <?php endif; ?>
   </main>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

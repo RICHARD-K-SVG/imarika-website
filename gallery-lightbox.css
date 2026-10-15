@@ -22,7 +22,7 @@
 .lightbox-prev { left: var(--space-3); }
 .lightbox-next { right: var(--space-3); }
 .lightbox-prev:hover,
-.lightbox-next:hover { background: var(--color-gold); }
+.lightbox-next:hover { background: var(--color-maroon); color: var(--color-white); }
 
 @media (max-width: 768px) {
   .lightbox-prev, .lightbox-next { width: 40px; height: 40px; font-size: 20px; }

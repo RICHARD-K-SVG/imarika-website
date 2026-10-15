@@ -2,17 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('admission-form');
   if (!form) return;
   const status = form.querySelector('.form-status');
-  const MAX = 5 * 1024 * 1024;
-  form.elements.dob.max = new Date().toISOString().split('T')[0];
-
-  form.querySelectorAll('.upload input[type=file]').forEach((input) => {
-    input.addEventListener('change', () => {
-      const label = input.closest('.upload').querySelector('.file-name');
-      const file = input.files[0];
-      if (file && file.size > MAX) { input.value = ''; label.textContent = 'File too large (max 5 MB)'; return; }
-      label.textContent = file ? file.name : 'No file chosen';
-    });
-  });
+  const today = new Date();
+  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  form.elements.dob.max = today.toISOString().split('T')[0];
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

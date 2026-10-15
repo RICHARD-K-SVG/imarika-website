@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Imarika Pre-Primary School</title>
-  <link rel="icon" href="assets/Sise.png">
+  <meta name="description" content="Contact Imarika Pre-Primary School in Iyumbu, Dodoma by phone, email or the online form.">
+  <link rel="icon" type="image/png" href="assets/images/Sise.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="lang-switcher.css">
   <link rel="stylesheet" href="visitor-counter.css">
@@ -17,8 +18,8 @@
         <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
         Imarika Pre-Primary School
       </a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <ul class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="index.html" data-i18n="nav_home">Home</a></li>
         <li><a href="about.html" data-i18n="nav_about">About</a></li>
         <li><a href="programs.html" data-i18n="nav_programs">Programs</a></li>
@@ -26,62 +27,101 @@
         <li><a href="news.html" data-i18n="nav_news">News</a></li>
         <li><a href="admissions.html" data-i18n="nav_admissions">Admissions</a></li>
         <li><a href="contact.html" aria-current="page" data-i18n="nav_contact">Contact</a></li>
-        <li><button class="btn-apply" onclick="window.location.href='admissions.html'" data-i18n="btn_apply">Apply Now</button></li>
+        <li><a class="btn-apply" href="admissions.html" data-i18n="nav_apply">Apply Now</a></li>
         <li>
           <div class="lang-switcher" role="group" aria-label="Choose language">
             <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-btn" data-lang="sw" aria-pressed="false">SW</button>
           </div>
+        </li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
-      <div class="container grid">
-        <div class="col-6">
-          <h1>Contact Us</h1>
-          <div class="contact-details">
-            <p>&#128222; <!-- PLACEHOLDER: phone pending client input -->+255 652 899 596/ +255 787 276 070/ +255 764 527 179</p>
-            <p>&#9993; <!-- PLACEHOLDER: email pending client input -->imarikapreprimaryschool@gmail.com</p>
-            <p>&#128205; <!-- PLACEHOLDER: address pending client input -->P. O. Box 1247 Iyumbu-Dodoma</p>
-          </div>
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">We’re ready to help</p>
+        <h1>Let’s talk about your child’s next step.</h1>
+        <p class="lede">Contact Imarika Pre-Primary School in Iyumbu, Dodoma, for questions about our programs, admissions or school life.</p>
+      </div>
+    </section>
 
-          <div class="map-embed">
-            <!-- PLACEHOLDER: replace src with real school location once address is confirmed -->
-            <iframe
-              src="https://www.google.com/maps?q=Iyumbu,Dodoma,Tanzania&output=embed"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="School location map (placeholder — update with real address)">
-            </iframe>
-          </div>
+    <section class="contact-section">
+      <div class="container contact-layout">
+        <div class="contact-information">
+          <p class="eyebrow">Reach the school</p>
+          <h2>We’d be glad to hear from you.</h2>
+          <p>Choose the contact method that works best for your family.</p>
+
+          <dl class="contact-methods">
+            <div class="contact-method">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call</span></dt>
+              <dd><a href="tel:+255652899596">+255 652 899 596</a></dd>
+            </div>
+            <div class="contact-method">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call</span></dt>
+              <dd><a href="tel:+255787276070">+255 787 276 070</a></dd>
+            </div>
+            <div class="contact-method">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>Call</span></dt>
+              <dd><a href="tel:+255764527179">+255 764 527 179</a></dd>
+            </div>
+            <div class="contact-method">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Email</span></dt>
+              <dd><a href="mailto:imarikapreprimaryschool@gmail.com">imarikapreprimaryschool@gmail.com</a></dd>
+            </div>
+            <div class="contact-method">
+              <dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Postal address</span></dt>
+              <dd>P. O. Box 1247, Iyumbu, Dodoma</dd>
+            </div>
+          </dl>
+
+          <p class="location-note">The postal address is listed here; contact the school for directions to the campus.</p>
         </div>
 
-        <div class="col-6">
-          <h2>Send a Message</h2>
+        <div class="contact-form-wrap">
+          <p class="eyebrow">Send a message</p>
+          <h2>How can we help?</h2>
           <form class="contact-form" action="includes/contact-handler.php" method="POST">
-             <div style="position: absolute; left: -9999px;" aria-hidden="true">
-               <label for="website">Leave this field empty</label> 
-               <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-               </div>
-
+            <input type="hidden" name="website" value="">
             <div>
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required>
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" required autocomplete="name">
             </div>
             <div>
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
             </div>
             <div>
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
             </div>
-            <button type="submit" class="btn-primary">Send Message</button>
+            <button type="submit" class="btn-primary">Send message</button>
             <p class="form-status" role="status" aria-live="polite"></p>
+            <p class="form-note">Please do not include sensitive personal documents in this message.</p>
           </form>
         </div>
+
+        <section class="contact-map" aria-labelledby="contact-map-title">
+          <div class="contact-map-heading">
+            <div>
+              <p class="eyebrow">Find us</p>
+              <h2 id="contact-map-title">Iyumbu, Dodoma</h2>
+            </div>
+            <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Iyumbu%2C+Dodoma%2C+Tanzania" target="_blank" rel="noopener">Open in Google Maps <span aria-hidden="true">&#8599;</span></a>
+          </div>
+          <div class="map-embed">
+            <iframe
+              src="https://maps.google.com/maps?q=Iyumbu%2C%20Dodoma%2C%20Tanzania&amp;output=embed"
+              title="Map showing Iyumbu, Dodoma, Tanzania"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="location-note">The map shows the Iyumbu area. Please contact the school for directions to the campus.</p>
+        </section>
       </div>
     </section>
   </main>
@@ -97,7 +137,7 @@
                <span>P. O. Box 1247 Iyumbu-Dodoma</span> </li> 
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 
-               <a href="tel:+255000000000">+255 652 899 596/ +255 787 276 070/ +255 764 527 179</a> </li> 
+               <span><a href="tel:+255652899596">+255 652 899 596</a> / <a href="tel:+255787276070">+255 787 276 070</a> / <a href="tel:+255764527179">+255 764 527 179</a></span> </li>
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                <polyline points="22,6 12,13 2,6"/></svg> 

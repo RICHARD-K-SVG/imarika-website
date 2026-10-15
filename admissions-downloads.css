@@ -9,7 +9,7 @@
 
 .download-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
 }
 
@@ -21,6 +21,7 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   padding: var(--space-3);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 .download-icon {
   width: 48px;
@@ -48,7 +49,6 @@
   align-self: flex-start;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
   color: var(--color-royal-blue);
   border: 1px solid var(--border-color);
   border-radius: 999px;
@@ -67,10 +67,46 @@
   background: var(--color-white);
   color: var(--color-maroon);
   font-weight: 500;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 .download-btn svg { width: 18px; height: 18px; stroke: currentColor; }
 .download-btn:hover { background: var(--color-maroon); color: var(--color-white); }
 
+@media (hover: hover) {
+  .download-card:hover { border-color: #c8aeb2; box-shadow: 0 8px 20px rgba(33, 20, 23, 0.08); transform: translateY(-2px); }
+}
+
 @media (max-width: 768px) {
   .download-grid { grid-template-columns: 1fr; }
 }
+
+.download-card {
+  min-height: 250px;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(48, 38, 40, 0.04);
+}
+.download-icon {
+  border-radius: 13px;
+  background: #f2e5e8;
+}
+.download-icon svg { stroke: var(--color-maroon); }
+.download-type {
+  color: #655a60;
+  border-color: #e8dfd9;
+  background: #fbf9f6;
+}
+.download-btn {
+  align-self: flex-start;
+  gap: 10px;
+  margin-top: var(--space-2);
+  padding: 12px 18px;
+  min-height: 46px;
+  border-radius: 9px;
+  border-color: var(--color-maroon);
+  background: var(--color-maroon);
+  color: var(--color-white);
+  font-weight: 600;
+}
+.download-btn:hover { background: #651627; color: var(--color-white); }
+.download-btn:focus-visible { outline: 3px solid rgba(122, 27, 46, 0.3); outline-offset: 3px; }

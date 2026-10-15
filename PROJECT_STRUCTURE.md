@@ -139,7 +139,7 @@ All 6 pages sit one click from Home via the persistent nav. Logo and "Apply Now"
 2. **Real content** — tagline, established year, mission/vision/history text, address, phone, email. Currently placeholder throughout the site.
 3. **Real photography** — Gallery tiles are generated placeholders; soft target of 30 days post-launch to swap in real photos.
 4. **PHPMailer install** — run `composer require phpmailer/phpmailer` inside `includes/` before the contact form can send mail. See `includes/vendor/README.md`.
-5. **SMTP / email credentials** — update the `CHANGE_ME` placeholders in `includes/contact-handler.php` once hosting/email is confirmed.
+5. **SMTP / email credentials** — set `IMARIKA_SMTP_HOST`, `IMARIKA_SMTP_USERNAME`, `IMARIKA_SMTP_PASSWORD`, `IMARIKA_SMTP_PORT`, `IMARIKA_SCHOOL_EMAIL`, and `IMARIKA_FROM_EMAIL` in the PHP server environment. Set `IMARIKA_BASE_URL` to the public site URL for password-reset links. Do not put mail credentials in page source.
 6. **Section 9 enhancements** (optional, not committed scope) — trust-signal section, WhatsApp click-to-chat, Swahili/English toggle, staff/teacher-ratio note, favicon + OG image, Admissions FAQ block.
 7. **Maintenance ownership** — who updates the Gallery and checks the contact form inbox post-launch (not yet assigned).
 

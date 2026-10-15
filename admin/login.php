@@ -49,9 +49,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login | Imarika Pre-Primary School</title>
-  <link rel="icon" href="../assets/Sise.png">
+    <link rel="icon" type="image/png" href="../assets/images/Sise.png">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261015-logo">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">
@@ -68,5 +68,6 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     </form>
     <p style="text-align:center;margin-top:var(--space-2)"><a href="forgot-password.php">Forgot password?</a></p>
   </div>
+  <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>
 </html>

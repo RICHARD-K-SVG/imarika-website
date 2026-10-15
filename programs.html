@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programs | Imarika Pre-Primary School</title>
-  <link rel="icon" href="assets/Sise.png">
+  <meta name="description" content="Explore Imarika’s Playgroup, PP1, PP2 and Standard 1–4 learning stages in Iyumbu, Dodoma.">
+  <link rel="icon" type="image/png" href="assets/images/Sise.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="lang-switcher.css">
   <link rel="stylesheet" href="visitor-counter.css">
@@ -17,8 +18,8 @@
         <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
         Imarika Pre-Primary School
       </a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-      <ul class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="index.html" data-i18n="nav_home">Home</a></li>
         <li><a href="about.html" data-i18n="nav_about">About</a></li>
         <li><a href="programs.html" aria-current="page" data-i18n="nav_programs">Programs</a></li>
@@ -26,63 +27,74 @@
         <li><a href="news.html" data-i18n="nav_news">News</a></li>
         <li><a href="admissions.html" data-i18n="nav_admissions">Admissions</a></li>
         <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
-        <li><button class="btn-apply" onclick="window.location.href='admissions.html'" data-i18n="btn_apply">Apply Now</button></li>
+        <li><a class="btn-apply" href="admissions.html" data-i18n="nav_apply">Apply Now</a></li>
         <li>
           <div class="lang-switcher" role="group" aria-label="Choose language">
             <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
             <button class="lang-btn" data-lang="sw" aria-pressed="false">SW</button>
           </div>
+        </li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">Learning at every stage</p>
+        <h1>Room to learn, play and grow.</h1>
+        <p class="lede">Our programs support children from Playgroup through Standard 4, with age-appropriate learning and steady steps toward independence.</p>
+        <div class="page-actions">
+          <a class="btn-primary" href="admissions.html">Ask about joining</a>
+          <a class="btn-secondary" href="contact.html">Talk with our team</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-overview">
       <div class="container">
-        <h1>Our Programs</h1>
-        <p>Seven grade levels across two stages, each designed around how children learn best at that age.</p>
-
-        <div class="tabs" role="tablist" aria-label="Programs">
-          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="pre-primary" id="tab-pre-primary">Pre-Primary</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="primary" id="tab-primary">Primary</button>
+        <div class="section-intro">
+          <p class="eyebrow">Two connected stages</p>
+          <h2>Foundations first. Confidence for what comes next.</h2>
+          <p>Explore the stages below. The ages shown are a guide; placement should be confirmed with the school.</p>
         </div>
 
-        <div id="pre-primary" class="tab-panel active" role="tabpanel" aria-labelledby="tab-pre-primary">
-          <div class="grid">
-            <div class="col-4 card grade-card">
-              <h3>Playgroup</h3>
-              <p>Age range is 3-4 years</p>
-            </div>
-            <div class="col-4 card grade-card">
-              <h3>PP1</h3>
-              <p>Age range is 4-5 years</p>
-            </div>
-            <div class="col-4 card grade-card">
-              <h3>PP2</h3>
-              <p>Age range is 5-6 years</p>
-            </div>
+        <div class="tabs" role="tablist" aria-label="Choose a learning stage">
+          <button class="tab-btn" type="button" role="tab" aria-selected="true" aria-controls="pre-primary" id="tab-pre-primary" tabindex="0">Pre-Primary</button>
+          <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="primary" id="tab-primary" tabindex="-1">Primary</button>
+        </div>
+
+        <div id="pre-primary" class="tab-panel active" role="tabpanel" aria-labelledby="tab-pre-primary" tabindex="0">
+          <p class="stage-intro">Playgroup, PP1 and PP2 introduce young learners to routines, communication, early number ideas and learning through play.</p>
+          <div class="grade-grid">
+            <article class="card grade-card"><h3>Playgroup</h3><p>Indicative age: 3–4</p></article>
+            <article class="card grade-card"><h3>PP1</h3><p>Indicative age: 4–5</p></article>
+            <article class="card grade-card"><h3>PP2</h3><p>Indicative age: 5–6</p></article>
           </div>
         </div>
 
-        <div id="primary" class="tab-panel" role="tabpanel" aria-labelledby="tab-primary">
-          <div class="grid">
-            <div class="col-4 card grade-card">
-              <h3>Standard 1</h3>
-              <p>Age range is 6-7 years</p>
-            </div>
-            <div class="col-4 card grade-card">
-              <h3>Standard 2</h3>
-              <p>Age range is 7-8 years</p>
-            </div>
-            <div class="col-4 card grade-card">
-              <h3>Standard 3</h3>
-              <p>Age range is 8-9 years</p>
-            </div>
-            <div class="col-4 card grade-card">
-              <h3>Standard 4</h3>
-              <p>Age range is 9-10 years</p>
-            </div>
+        <div id="primary" class="tab-panel" role="tabpanel" aria-labelledby="tab-primary" tabindex="0">
+          <p class="stage-intro">Standard 1–4 build on early foundations with growing independence, core academic skills and opportunities to work with others.</p>
+          <div class="grade-grid">
+            <article class="card grade-card"><h3>Standard 1</h3><p>Indicative age: 6–7</p></article>
+            <article class="card grade-card"><h3>Standard 2</h3><p>Indicative age: 7–8</p></article>
+            <article class="card grade-card"><h3>Standard 3</h3><p>Indicative age: 8–9</p></article>
+            <article class="card grade-card"><h3>Standard 4</h3><p>Indicative age: 9–10</p></article>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-cta-section">
+      <div class="container page-cta">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2>Let’s find the right starting point.</h2>
+          <p>Contact the school in Iyumbu, Dodoma, to ask about grade placement and admissions.</p>
+        </div>
+        <div class="page-actions">
+          <a class="btn-primary" href="admissions.html">View admissions</a>
+          <a class="btn-secondary" href="contact.html">Contact Imarika</a>
         </div>
       </div>
     </section>
@@ -99,7 +111,7 @@
                <span>P. O. Box 1247 Iyumbu-Dodoma</span> </li> 
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 
-               <a href="tel:+255000000000">+255 652 899 596/ +255 787 276 070/ +255 764 527 179</a> </li> 
+               <span><a href="tel:+255652899596">+255 652 899 596</a> / <a href="tel:+255787276070">+255 787 276 070</a> / <a href="tel:+255764527179">+255 764 527 179</a></span> </li>
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                <polyline points="22,6 12,13 2,6"/></svg> 

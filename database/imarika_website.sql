@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Oct 12, 2026 at 04:41 PM
+-- Generation Time: Oct 15, 2026 at 04:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,18 +63,9 @@ CREATE TABLE `admissions` (
   `relationship` varchar(50) NOT NULL,
   `phone` varchar(30) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
-  `birth_certificate_path` varchar(255) NOT NULL,
-  `student_photo_path` varchar(255) NOT NULL,
   `status` enum('Pending','Reviewed','Accepted','Rejected') NOT NULL DEFAULT 'Pending',
   `submitted_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `admissions`
---
-
-INSERT INTO `admissions` (`id`, `student_name`, `dob`, `gender`, `level`, `address`, `guardian_name`, `relationship`, `phone`, `email`, `birth_certificate_path`, `student_photo_path`, `status`, `submitted_at`) VALUES
-(3, 'VUMILIA CHANGALA', '2023-09-13', 'Female', 'Standard 1', 'P. O BOX 2324\r\nKILOLO', 'VUMILIA CHANGALA', 'Mother', '+255620823520', 'richard2002kikoti@gmail.com', 'includes/uploads/admissions/birth_certificate_20261012_162950_dbbbd337.pdf', 'includes/uploads/admissions/student_photo_20261012_162950_158b9e8e.jpg', 'Pending', '2026-10-12 17:29:50');
 
 -- --------------------------------------------------------
 
@@ -129,7 +120,7 @@ CREATE TABLE `site_stats` (
 --
 
 INSERT INTO `site_stats` (`id`, `total_views`) VALUES
-(1, 4);
+(1, 18);
 
 --
 -- Indexes for dumped tables
@@ -180,13 +171,13 @@ ALTER TABLE `admin_users`
 -- AUTO_INCREMENT for table `admissions`
 --
 ALTER TABLE `admissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `news`
