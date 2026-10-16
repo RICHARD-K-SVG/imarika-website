@@ -3,8 +3,6 @@
    Source of truth: IMARIKA_WEBSITE_REQUIREMENTS_v3.docx / PROJECT_STRUCTURE.md
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Work+Sans:wght@400;500&display=swap');
-
 :root {
   /* Colors — brand tokens (unchanged use rules) */
   --color-maroon: #7A1B2E;   /* Deep maroon brand color */
@@ -733,7 +731,13 @@ footer.site-footer .footer-copy { font-size: var(--small-size); margin-top: var(
 }
 .home-about-cta { margin-top: 4px; }
 .home-about-cta span { margin-left: 6px; }
-.home-gallery-cta { flex: none; background: var(--color-maroon); color: var(--color-white); }
+.home-gallery-cta {
+  display: block;
+  width: fit-content;
+  margin: var(--space-3) auto 0;
+  background: var(--color-maroon);
+  color: var(--color-white);
+}
 .home-gallery-cta:hover { background: #651627; color: var(--color-white); }
 .home-gallery-cta span { margin-left: 6px; }
 .text-link { color: var(--color-maroon); font-weight: 600; }
@@ -1012,7 +1016,8 @@ section.alt-bg { background: #f8f5f1; }
 .home-about-grid { gap: clamp(42px, 8vw, 112px); }
 .home-about-image img,
 .section-photo img {
-  border-radius: 24px;
+  border: 8px solid rgba(255, 255, 255, 0.82);
+  border-radius: 28px;
   box-shadow: 0 18px 46px rgba(57, 40, 39, 0.1);
 }
 .image-caption { color: #716970; font-size: 13px; }
@@ -1054,12 +1059,18 @@ section.alt-bg { background: #f8f5f1; }
 
 .home-life { background: #fff; }
 .section-heading-inline { align-items: end; margin-bottom: 32px; }
-.slider {
-  border: 7px solid #fff;
-  border-radius: 24px;
+.home-life .slider {
+  border: 1px solid #e7ded8;
+  border-radius: 30px;
   background: #f2ece5;
-  box-shadow: 0 20px 52px rgba(57, 40, 39, 0.12);
+  box-shadow: 0 24px 64px rgba(57, 40, 39, 0.17);
 }
+.home-life .slide img {
+  border: 7px solid #fff;
+  border-radius: 26px;
+}
+.home-life .slide picture { display: block; width: 100%; height: 100%; }
+.home-life .slide figcaption { left: 7px; right: 7px; bottom: 7px; }
 .slide figcaption { padding: 68px 34px 28px; font-size: clamp(1.2rem, 2vw, 1.6rem); }
 .slider-btn { width: 48px; height: 48px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18); }
 .slider-toggle { bottom: 18px; left: 20px; }
@@ -1138,12 +1149,13 @@ section.alt-bg { background: #f8f5f1; }
 .gallery-grid { gap: 22px; }
 .gallery-card { overflow: hidden; }
 .gallery-item {
-  border: 0;
-  border-radius: 18px;
+  border: 8px solid rgba(255, 255, 255, 0.82);
+  border-radius: 28px;
   background: #f4eee8;
-  box-shadow: 0 10px 26px rgba(48, 38, 40, 0.09);
+  box-shadow: 0 24px 64px rgba(57, 40, 39, 0.17);
   aspect-ratio: 4 / 3;
 }
+.gallery-item picture { display: block; width: 100%; height: 100%; }
 .gallery-card:nth-child(3n + 2) .gallery-item { aspect-ratio: 1 / 1; }
 .gallery-item img { transition: transform 420ms cubic-bezier(.2,.7,.2,1); }
 .gallery-item:hover img { transform: scale(1.045); }
@@ -1153,10 +1165,35 @@ section.alt-bg { background: #f8f5f1; }
 
 .contact-section { background: #fff; }
 .contact-layout { gap: clamp(34px, 6vw, 76px); }
+.contact-information {
+  min-width: 0;
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid #eae3dc;
+  border-radius: 20px;
+  background: #fbf9f6;
+  box-shadow: 0 16px 44px rgba(48, 38, 40, 0.07);
+}
 .contact-information > p:not(.eyebrow) { color: #625b60; }
 .contact-methods { margin: 26px 0; }
 .contact-method { grid-template-columns: 115px minmax(0, 1fr); gap: 14px; padding: 14px 0; border-color: #eee8e2; }
 .contact-method dt { color: #776a70; text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; }
+.contact-method dt svg {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  border: 1px solid #ead9dc;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #fff 0%, #f8edef 100%);
+  box-shadow: 0 4px 10px rgba(122, 27, 46, 0.08);
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.contact-method:hover dt svg {
+  transform: translateY(-2px);
+  border-color: var(--color-maroon);
+  background: var(--color-maroon);
+  box-shadow: 0 7px 16px rgba(122, 27, 46, 0.2);
+  stroke: #fff;
+}
 .contact-method dd,
 .contact-method dd a { color: #38343a; font-size: 14px; font-weight: 600; }
 .contact-method dd a:hover { color: var(--color-maroon); }
@@ -1236,7 +1273,12 @@ footer.site-footer .footer-copy { margin-top: 24px; padding-top: 20px; border-to
   .home-programs .chapter-list { gap: 14px; }
   .home-programs .chapter { min-height: auto; padding: 22px; }
   .home-programs .chapter p { min-height: 0; }
-  .home-life .slider { border-width: 5px; border-radius: 18px; }
+  .home-life .slider { border-radius: 22px; }
+  .home-life .slide img { border-width: 5px; border-radius: 18px; }
+  .home-life .slide figcaption { left: 5px; right: 5px; bottom: 5px; }
+  .home-about-image img,
+  .section-photo img { border-width: 5px; border-radius: 20px; }
+  .gallery-item { border-width: 5px; border-radius: 20px; }
   .slide figcaption { padding: 54px 22px 26px; }
   .section-heading-inline { gap: 18px; }
   .principles-grid { gap: 14px; }

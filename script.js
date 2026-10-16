@@ -89,7 +89,7 @@ function initGalleryLightbox() {
     // Wrap around in both directions so Next/Previous cycle through all photos
     currentIndex = (index + items.length) % items.length;
     const img = items[currentIndex].querySelector('img');
-    lightboxImg.src = img.src;
+    lightboxImg.src = img.currentSrc || img.src;
     lightboxImg.alt = img.alt;
   }
 
