@@ -12,6 +12,7 @@
  */
 
 header('Content-Type: application/json');
+header('Cache-Control: public, max-age=60, stale-while-revalidate=300');
 require __DIR__ . '/db-config.php';
 
 $pdo = getDbConnection();

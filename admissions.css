@@ -60,7 +60,7 @@
 .admissions-hero h1 { max-width: 13ch; color: var(--color-maroon); font-size: clamp(2.7rem, 5vw, 4.5rem); }
 .admissions-hero .lede { max-width: 60ch; color: var(--color-ink); }
 .admissions-hero .btn-primary {
-  border: 0;
+  border: 1px solid #a84758;
   background: var(--color-maroon);
   color: var(--color-white);
   box-shadow: 0 8px 20px rgba(31, 14, 20, 0.2);
@@ -78,11 +78,14 @@
 .application-steps li {
   min-height: 186px;
   padding: 24px;
-  border: 1px solid #eae3dc;
+  border: 1px solid var(--content-card-border, #e8e0da);
   border-top: 3px solid var(--color-maroon);
-  border-radius: 4px 4px 16px 16px;
-  background: #fbf9f6;
+  border-radius: 16px;
+  background: linear-gradient(155deg, #fff 0%, #fbf9f6 100%);
+  box-shadow: 0 10px 26px rgba(48, 38, 40, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
+.application-steps li:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(48, 38, 40, 0.09); }
 .application-steps li::before {
   display: grid;
   width: 38px;
@@ -111,9 +114,11 @@
   position: relative;
   min-height: 250px;
   padding: clamp(22px, 3vw, 30px);
-  border-color: #eae3dc;
-  border-radius: 18px;
-  box-shadow: 0 12px 32px rgba(48, 38, 40, 0.06);
+  border-color: var(--content-card-border, #e8e0da);
+  border-top: 3px solid var(--color-gold);
+  border-radius: 16px;
+  background: linear-gradient(155deg, #fff 0%, #fbf9f6 100%);
+  box-shadow: 0 10px 28px rgba(48, 38, 40, 0.055);
 }
 .download-icon { width: 52px; height: 52px; border-radius: 15px; background: #f2e5e8; }
 .download-icon svg { stroke: var(--color-maroon); }
@@ -176,8 +181,107 @@
 .confirm { padding: 44px 24px; }
 .confirm .tick { background: #e8f0e8; color: #315c42; }
 
+.confirmation-panel {
+  position: relative;
+  overflow: hidden;
+  max-width: 790px;
+  margin: 8px auto 0;
+  padding: clamp(32px, 6vw, 62px) clamp(20px, 7vw, 76px);
+  border: 1px solid #e8ddd5;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(247, 237, 224, 0.72), transparent 46%),
+    #fff;
+  box-shadow: 0 24px 60px rgba(48, 38, 40, 0.09);
+  text-align: center;
+}
+.confirmation-icon {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 20px;
+  place-items: center;
+  border: 1px solid #c8ddce;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #edf5ef, #e2eee5);
+  box-shadow: 0 8px 20px rgba(49, 92, 66, 0.1);
+  color: #315c42;
+}
+.confirmation-icon svg { width: 36px; height: 36px; }
+.confirmation-eyebrow {
+  margin: 0 0 9px;
+  color: var(--color-maroon);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.confirmation-panel h2 {
+  display: block;
+  margin: 0 0 12px;
+  color: var(--color-maroon);
+  font-size: clamp(27px, 4vw, 38px);
+  line-height: 1.15;
+}
+.confirmation-copy {
+  max-width: 54ch;
+  margin: 0 auto 25px;
+  color: #625b60;
+  line-height: 1.7;
+}
+.confirmation-next {
+  display: flex;
+  max-width: 510px;
+  align-items: center;
+  gap: 14px;
+  margin: 0 auto 26px;
+  padding: 16px 18px;
+  border: 1px solid #ece4dd;
+  border-radius: 14px;
+  background: rgba(250, 247, 243, 0.85);
+  text-align: left;
+}
+.confirmation-next-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border: 1px solid #ead9dc;
+  border-radius: 12px;
+  background: #f8edef;
+  color: var(--color-maroon);
+}
+.confirmation-next-icon svg { width: 22px; height: 22px; }
+.confirmation-next strong,
+.confirmation-next span span { display: block; }
+.confirmation-next strong { margin-bottom: 3px; color: #39343a; font-size: 14px; }
+.confirmation-next span span { color: #716970; font-size: 13px; line-height: 1.5; }
+.confirmation-home {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 23px;
+  border: 1px solid #a84758;
+  border-radius: 10px;
+  box-shadow: 0 7px 18px rgba(112, 24, 41, 0.15);
+  text-decoration: none;
+}
+.confirmation-home:hover { filter: brightness(0.94); }
+
 @media(max-width:768px) {
   .application-steps li { min-height: 0; }
   .downloads-section { padding: 48px 0; }
   .form-card { padding: 22px; }
+  .confirmation-panel { padding: 34px 22px; border-radius: 18px; }
+  .confirmation-next { align-items: flex-start; padding: 14px; }
+}
+
+@media(max-width:420px) {
+  .confirmation-panel { padding: 30px 17px; }
+  .confirmation-icon { width: 66px; height: 66px; border-radius: 20px; }
+  .confirmation-copy { font-size: 14px; }
+  .confirmation-next { gap: 11px; }
+  .confirmation-home { width: 100%; }
 }

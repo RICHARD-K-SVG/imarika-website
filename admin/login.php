@@ -1,5 +1,5 @@
 <?php
-session_start();
+require __DIR__ . '/includes/session.php';
 require __DIR__ . '/../includes/db-config.php';
 
 $error = '';
@@ -10,35 +10,38 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
 
     $pdo = getDbConnection();
     if ($pdo === null) {
-        $error = 'Database is not configured. Check includes/db-config.php.';
+        $error = 'The admin service is temporarily unavailable. Please try again later.';
     } else {
-        $stmt = $pdo->prepare('SELECT id, username, password_hash, failed_attempts, locked_until FROM admin_users WHERE username = :u');
-        $stmt->execute(['u' => $username]);
-        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            $stmt = $pdo->prepare('SELECT id, username, password_hash, failed_attempts, locked_until FROM admin_users WHERE username = :u');
+            $stmt->execute(['u' => $username]);
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $isLocked = $admin && !empty($admin['locked_until']) && strtotime($admin['locked_until']) > time();
+            $isLocked = $admin && !empty($admin['locked_until']) && strtotime($admin['locked_until']) > time();
 
-        if ($isLocked) {
-            $minutesLeft = (int) ceil((strtotime($admin['locked_until']) - time()) / 60);
-            $error = "Too many failed attempts. Please try again in {$minutesLeft} minute(s).";
-        } elseif ($admin && password_verify($password, $admin['password_hash'])) {
-            // Successful login — clear any prior failed-attempt count.
-            $pdo->prepare('UPDATE admin_users SET failed_attempts = 0, locked_until = NULL WHERE id = :id')
-                ->execute(['id' => $admin['id']]);
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_username'] = $admin['username'];
-            header('Location: dashboard.php');
-            exit;
-        } else {
-            // Wrong password (or unknown username) — only track attempts for
-            // real accounts, so this can't be used to guess which usernames exist.
-            if ($admin) {
-                $attempts = (int) $admin['failed_attempts'] + 1;
-                $lockedUntil = $attempts >= 5 ? date('Y-m-d H:i:s', time() + 15 * 60) : null;
-                $pdo->prepare('UPDATE admin_users SET failed_attempts = :a, locked_until = :l WHERE id = :id')
-                    ->execute(['a' => $attempts, 'l' => $lockedUntil, 'id' => $admin['id']]);
+            if ($isLocked) {
+                $minutesLeft = (int) ceil((strtotime($admin['locked_until']) - time()) / 60);
+                $error = "Too many failed attempts. Please try again in {$minutesLeft} minute(s).";
+            } elseif ($admin && password_verify($password, $admin['password_hash'])) {
+                $pdo->prepare('UPDATE admin_users SET failed_attempts = 0, locked_until = NULL WHERE id = :id')
+                    ->execute(['id' => $admin['id']]);
+                session_regenerate_id(true);
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_username'] = $admin['username'];
+                header('Location: dashboard.php');
+                exit;
+            } else {
+                if ($admin) {
+                    $attempts = (int) $admin['failed_attempts'] + 1;
+                    $lockedUntil = $attempts >= 5 ? date('Y-m-d H:i:s', time() + 15 * 60) : null;
+                    $pdo->prepare('UPDATE admin_users SET failed_attempts = :a, locked_until = :l WHERE id = :id')
+                        ->execute(['a' => $attempts, 'l' => $lockedUntil, 'id' => $admin['id']]);
+                }
+                $error = 'Invalid username or password.';
             }
-            $error = 'Invalid username or password.';
+        } catch (PDOException $exception) {
+            error_log('Admin login database operation failed: ' . $exception->getMessage());
+            $error = 'The admin service is temporarily unavailable. Please try again later.';
         }
     }
 }
@@ -53,8 +56,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css?v=20261015-logo">
+  <link rel="stylesheet" href="../styles.css?v=20261016-responsive-perf1">
+  <link rel="stylesheet" href="admin.css?v=20261016-logout-color6">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">

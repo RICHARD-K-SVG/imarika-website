@@ -9,13 +9,32 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!el) return;
   const box = el.closest('.visitor-counter');
   const KEY = 'imarika_visit_counted';
-  const isNewSession = !sessionStorage.getItem(KEY);
+  const COUNT_KEY = 'imarika_visit_total';
+  let isNewSession = true;
+  let cachedTotal = null;
+
+  try {
+    isNewSession = sessionStorage.getItem(KEY) !== '1';
+    cachedTotal = sessionStorage.getItem(COUNT_KEY);
+  } catch (err) {
+    // Storage may be unavailable in private browsing; fetch the count normally.
+  }
+
+  if (!isNewSession && cachedTotal !== null && Number.isFinite(Number(cachedTotal))) {
+    showWhenVisible(el, Number(cachedTotal));
+    return;
+  }
 
   try {
     const res = await fetch('includes/visit-counter.php', { method: isNewSession ? 'POST' : 'GET' });
     const data = await res.json();
     if (!data.success) throw new Error('counter unavailable');
-    if (isNewSession) sessionStorage.setItem(KEY, '1');
+    try {
+      sessionStorage.setItem(KEY, '1');
+      sessionStorage.setItem(COUNT_KEY, String(data.total));
+    } catch (err) {
+      // Keep the counter usable even when browser storage is blocked.
+    }
     showWhenVisible(el, data.total);
   } catch (err) {
     box.hidden = true; // fail quietly: no broken-looking footer if the counter is down

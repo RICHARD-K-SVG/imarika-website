@@ -1,34 +1,56 @@
 <?php
 require __DIR__ . '/../includes/db-config.php';
 $pdo = getDbConnection();
-$token = $_GET['token'] ?? $_POST['token'] ?? '';
+$tokenValue = $_GET['token'] ?? $_POST['token'] ?? '';
+$token = is_string($tokenValue) && preg_match('/\A[a-f0-9]{64}\z/', $tokenValue) ? $tokenValue : '';
 $error = '';
 $success = false;
 
 $admin = null;
-if ($pdo !== null && $token !== '') {
-    $stmt = $pdo->prepare('SELECT id, reset_expires FROM admin_users WHERE reset_token = :t');
-    $stmt->execute(['t' => $token]);
-    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($pdo === null) {
+    $error = 'Password reset is temporarily unavailable. Please try again later.';
+} elseif ($token !== '') {
+    try {
+        $stmt = $pdo->prepare('SELECT id, reset_expires FROM admin_users WHERE reset_token = :t');
+        $stmt->execute(['t' => $token]);
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Password reset token lookup failed: ' . $exception->getMessage());
+        $error = 'Password reset is temporarily unavailable. Please try again later.';
+    }
 }
 
-$isValid = $admin && strtotime($admin['reset_expires']) > time();
+$expiresAt = $admin && !empty($admin['reset_expires']) ? strtotime($admin['reset_expires']) : false;
+$isValid = $admin && $expiresAt !== false && $expiresAt > time();
 
-if (!$isValid) {
+if ($pdo !== null && !$isValid && $error === '') {
     $error = 'This reset link is invalid or has expired. Please request a new one.';
-} elseif (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+}
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null && $isValid) {
     $new = $_POST['new_password'] ?? '';
     $confirm = $_POST['confirm_password'] ?? '';
 
-    if (strlen($new) < 8) {
+    if (!is_string($new) || !is_string($confirm)) {
+        $error = 'Please enter a valid password.';
+    } elseif (strlen($new) < 8) {
         $error = 'Password must be at least 8 characters.';
     } elseif ($new !== $confirm) {
         $error = 'Passwords do not match.';
     } else {
-        $hash = password_hash($new, PASSWORD_DEFAULT);
-        $pdo->prepare('UPDATE admin_users SET password_hash = :h, reset_token = NULL, reset_expires = NULL, failed_attempts = 0, locked_until = NULL WHERE id = :id')
-            ->execute(['h' => $hash, 'id' => $admin['id']]);
-        $success = true;
+        try {
+            $hash = password_hash($new, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare('UPDATE admin_users SET password_hash = :h, reset_token = NULL, reset_expires = NULL, failed_attempts = 0, locked_until = NULL WHERE id = :id AND reset_token = :t AND reset_expires > NOW()');
+            $stmt->execute(['h' => $hash, 'id' => $admin['id'], 't' => $token]);
+            $success = $stmt->rowCount() === 1;
+            if (!$success) {
+                $error = 'This reset link is invalid or has expired. Please request a new one.';
+                $isValid = false;
+            }
+        } catch (PDOException $exception) {
+            error_log('Password reset update failed: ' . $exception->getMessage());
+            $error = 'Password reset is temporarily unavailable. Please try again later.';
+        }
     }
 }
 ?>
@@ -42,8 +64,8 @@ if (!$isValid) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css?v=20261015-logo">
+  <link rel="stylesheet" href="../styles.css?v=20261016-responsive-perf1">
+  <link rel="stylesheet" href="admin.css?v=20261016-logout-color6">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">

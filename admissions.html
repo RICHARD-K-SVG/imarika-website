@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="admissions.css">
+  <link rel="stylesheet" href="styles.css?v=20261016-responsive-perf1">
+  <link rel="stylesheet" href="admissions.css?v=20261016-confirmation1">
   <link rel="stylesheet" href="lang-switcher.css">
   <link rel="stylesheet" href="admissions-downloads.css">
   <link rel="stylesheet" href="visitor-counter.css">
@@ -112,11 +112,20 @@
           </div>
         </form>
 
-        <div id="confirmation" class="form-card confirm" hidden tabindex="-1">
-          <div class="tick" aria-hidden="true">&#10003;</div>
-          <h2>Thank you. Your application has been submitted Successfully.</h2>
-          <p>Our admissions team will review it and contact you about the next steps.</p>
-          <a href="index.html" class="btn-secondary">Back to home</a>
+        <div id="confirmation" class="form-card confirm confirmation-panel" hidden tabindex="-1" aria-labelledby="confirmation-title">
+          <div class="confirmation-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.2 4.2L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="confirmation-eyebrow">Application received</p>
+          <h2 id="confirmation-title">Thank you for applying!</h2>
+          <p class="confirmation-copy">Your application has been submitted successfully. Our admissions team will review the details and contact you about the next steps.</p>
+          <div class="confirmation-next">
+            <span class="confirmation-next-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span><strong>What happens next?</strong><span>We’ll be in touch after your application has been reviewed.</span></span>
+          </div>
+          <a href="index.html" class="btn-primary confirmation-home">Back to home</a>
         </div>
       </div>
     </section>
@@ -191,7 +200,7 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="visitor-counter.js"></script>
+  <script src="visitor-counter.js?v=20261016-session-cache1"></script>
   <script src="admissions.js"></script>
   <script src="translations.js"></script>
   <script src="lang.js"></script>

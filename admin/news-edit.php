@@ -4,36 +4,67 @@ require __DIR__ . '/../includes/db-config.php';
 
 $pdo = getDbConnection();
 $categories = ['Announcements', 'Events', 'Sports', 'Academic Results'];
-$id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
+$id = filter_var($_GET['id'] ?? $_POST['id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
 $message = '';
-
-if (!$id || $pdo === null) { header('Location: news.php'); exit; }
-
-if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
-    $title = trim($_POST['title'] ?? '');
-    $category = $_POST['category'] ?? '';
-    $snippet = trim($_POST['snippet'] ?? '');
-    $content = trim($_POST['content'] ?? '');
-    $pinned = !empty($_POST['pinned']) ? 1 : 0;
-
-    if ($title !== '' && $snippet !== '' && in_array($category, $categories, true)) {
-        if ($pinned) {
-            $pdo->exec('UPDATE news SET pinned = 0'); // only one pinned post at a time
-        }
-        $stmt = $pdo->prepare(
-            'UPDATE news SET title=:title, category=:category, snippet=:snippet, content=:content, pinned=:pinned WHERE id=:id'
-        );
-        $stmt->execute(['title' => $title, 'category' => $category, 'snippet' => $snippet, 'content' => $content, 'pinned' => $pinned, 'id' => $id]);
-        header('Location: news.php');
-        exit;
-    }
-    $message = 'Please fill in the title, category, and snippet.';
+$csrfToken = $_SESSION['admin_news_csrf'] ?? '';
+if ($csrfToken === '') {
+    $csrfToken = bin2hex(random_bytes(32));
+    $_SESSION['admin_news_csrf'] = $csrfToken;
 }
 
-$stmt = $pdo->prepare('SELECT * FROM news WHERE id = :id');
-$stmt->execute(['id' => $id]);
-$post = $stmt->fetch(PDO::FETCH_ASSOC);
+if ($id === false || $pdo === null) { header('Location: news.php'); exit; }
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    $title = trim(is_string($_POST['title'] ?? null) ? $_POST['title'] : '');
+    $category = $_POST['category'] ?? '';
+    $snippet = trim(is_string($_POST['snippet'] ?? null) ? $_POST['snippet'] : '');
+    $content = trim(is_string($_POST['content'] ?? null) ? $_POST['content'] : '');
+    $pinned = !empty($_POST['pinned']) ? 1 : 0;
+
+    if (!is_string($_POST['csrf_token'] ?? null) || !hash_equals($csrfToken, $_POST['csrf_token'])) {
+        $message = 'Your session has expired. Refresh the page and try again.';
+    } elseif ($title !== '' && $snippet !== '' && in_array($category, $categories, true)) {
+        try {
+            $pdo->beginTransaction();
+            if ($pinned) {
+                $pdo->exec('UPDATE news SET pinned = 0'); // only one pinned post at a time
+            }
+            $stmt = $pdo->prepare(
+                'UPDATE news SET title=:title, category=:category, snippet=:snippet, content=:content, pinned=:pinned WHERE id=:id'
+            );
+            $stmt->execute(['title' => $title, 'category' => $category, 'snippet' => $snippet, 'content' => $content, 'pinned' => $pinned, 'id' => $id]);
+            $pdo->commit();
+            header('Location: news.php');
+            exit;
+        } catch (PDOException $exception) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            error_log('Admin news edit failed: ' . $exception->getMessage());
+            $message = 'The news update could not be saved. Please try again.';
+        }
+    } else {
+        $message = 'Enter a title and summary, and select a valid category.';
+    }
+}
+
+try {
+    $stmt = $pdo->prepare('SELECT * FROM news WHERE id = :id');
+    $stmt->execute(['id' => $id]);
+    $post = $stmt->fetch(PDO::FETCH_ASSOC);
+} catch (PDOException $exception) {
+    error_log('Admin news post load failed: ' . $exception->getMessage());
+    header('Location: news.php');
+    exit;
+}
 if (!$post) { header('Location: news.php'); exit; }
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    $post['title'] = $title;
+    $post['category'] = $category;
+    $post['snippet'] = $snippet;
+    $post['content'] = $content;
+    $post['pinned'] = $pinned;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,41 +76,61 @@ if (!$post) { header('Location: news.php'); exit; }
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css?v=20261015-logo">
+  <link rel="stylesheet" href="../styles.css?v=20261016-responsive-perf1">
+  <link rel="stylesheet" href="admin.css?v=20261016-logout-color6">
 </head>
 <body>
   <?php require __DIR__ . '/includes/admin-nav.php'; ?>
-  <main class="admin-main">
-    <h1>Edit Post</h1>
-    <?php if ($message): ?><p class="admin-error"><?= htmlspecialchars($message) ?></p><?php endif; ?>
-    <div class="admin-form-card">
-      <form method="POST">
-        <input type="hidden" name="id" value="<?= (int) $post['id'] ?>">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" value="<?= htmlspecialchars($post['title']) ?>" required>
-
-        <label for="category">Category</label>
-        <select id="category" name="category" required>
-          <?php foreach ($categories as $c): ?>
-            <option value="<?= $c ?>" <?= $post['category'] === $c ? 'selected' : '' ?>><?= $c ?></option>
-          <?php endforeach; ?>
-        </select>
-
-        <label for="snippet">Snippet</label>
-        <textarea id="snippet" name="snippet" required><?= htmlspecialchars($post['snippet']) ?></textarea>
-
-        <label for="content">Full content</label>
-        <textarea id="content" name="content"><?= htmlspecialchars($post['content'] ?? '') ?></textarea>
-
-        <label class="admin-checkbox">
-          <input type="checkbox" name="pinned" value="1" <?= $post['pinned'] ? 'checked' : '' ?>> Pin this as the highlighted notice
-        </label>
-
-        <button type="submit" class="btn-primary">Save Changes</button>
-      </form>
+  <main class="admin-main admin-news-main">
+    <div class="admin-page-heading admin-news-heading">
+      <div>
+        <p class="admin-page-eyebrow">Content management</p>
+        <h1>Edit post</h1>
+        <p>Update this news item and keep families up to date.</p>
+      </div>
+      <a class="admin-back-link" href="news.php"><span aria-hidden="true">&larr;</span> Back to news</a>
     </div>
-    <a href="news.php">&larr; Back to all posts</a>
+    <?php if ($message): ?><p class="admin-error" role="alert"><?= htmlspecialchars($message) ?></p><?php endif; ?>
+    <section class="admin-news-composer" aria-labelledby="edit-post-title">
+      <div class="admin-news-section-heading">
+        <p class="admin-page-eyebrow">Post details</p>
+        <h2 id="edit-post-title">Edit “<?= htmlspecialchars($post['title']) ?>”</h2>
+        <p>Changes will appear on the public news page when saved.</p>
+      </div>
+      <form method="POST" class="admin-news-form">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>">
+        <input type="hidden" name="id" value="<?= (int) $post['id'] ?>">
+        <div class="admin-news-fields">
+          <div class="admin-news-field">
+            <label for="title">Post title</label>
+            <input type="text" id="title" name="title" value="<?= htmlspecialchars($post['title']) ?>" maxlength="255" required>
+          </div>
+          <div class="admin-news-field">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+              <?php foreach ($categories as $c): ?>
+                <option value="<?= htmlspecialchars($c, ENT_QUOTES, 'UTF-8') ?>" <?= $post['category'] === $c ? 'selected' : '' ?>><?= htmlspecialchars($c) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="admin-news-field admin-news-field-wide">
+            <label for="snippet">Short summary <span>Up to 300 characters</span></label>
+            <textarea id="snippet" name="snippet" maxlength="300" rows="3" required><?= htmlspecialchars($post['snippet']) ?></textarea>
+          </div>
+          <div class="admin-news-field admin-news-field-wide">
+            <label for="content">Full content <span>Optional</span></label>
+            <textarea id="content" name="content" rows="5"><?= htmlspecialchars($post['content'] ?? '') ?></textarea>
+          </div>
+        </div>
+        <div class="admin-news-form-footer">
+          <label class="admin-news-pin-option">
+            <input type="checkbox" name="pinned" value="1" <?= $post['pinned'] ? 'checked' : '' ?>>
+            <span><strong>Highlight this post</strong><small>Show it as the featured notice on the public news page.</small></span>
+          </label>
+          <button type="submit" class="btn-primary">Save changes</button>
+        </div>
+      </form>
+    </section>
   </main>
   <?php require __DIR__ . '/includes/admin-footer.php'; ?>
 </body>

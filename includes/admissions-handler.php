@@ -42,10 +42,6 @@ $d = DateTime::createFromFormat('Y-m-d', $f['dob']);
 if (!$d || $d > new DateTime()) respond(false, 'Please enter a valid date of birth.');
 if (empty($_POST['consent'])) respond(false, 'Please confirm the information is accurate.');
 
-// Keep the legacy path columns populated with empty strings; existing
-// installations define them as NOT NULL.
-$storedPaths = ['birth_certificate' => '', 'student_photo' => ''];
-
 $savedToDb = false;
 $emailed = false;
 
@@ -55,11 +51,9 @@ if ($pdo !== null) {
     try {
         $stmt = $pdo->prepare(
             'INSERT INTO admissions
-                (student_name, dob, gender, level, address, guardian_name, relationship, phone, email,
-                 birth_certificate_path, student_photo_path)
+                (student_name, dob, gender, level, address, guardian_name, relationship, phone, email)
              VALUES
-                (:student_name, :dob, :gender, :level, :address, :guardian_name, :relationship, :phone, :email,
-                 :birth_certificate_path, :student_photo_path)'
+                (:student_name, :dob, :gender, :level, :address, :guardian_name, :relationship, :phone, :email)'
         );
         $stmt->execute([
             'student_name'           => $f['student_name'],
@@ -71,8 +65,6 @@ if ($pdo !== null) {
             'relationship'           => $f['relationship'],
             'phone'                  => $f['phone'],
             'email'                  => $f['email'] !== '' ? $f['email'] : null,
-            'birth_certificate_path' => $storedPaths['birth_certificate'],
-            'student_photo_path'     => $storedPaths['student_photo'],
         ]);
         $savedToDb = true;
     } catch (PDOException $e) {

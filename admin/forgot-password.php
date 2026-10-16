@@ -12,51 +12,60 @@ use PHPMailer\PHPMailer\Exception;
 
 $pdo = getDbConnection();
 $message = '';
+$error = '';
 
-if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null) {
-    $username = trim($_POST['username'] ?? '');
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    if ($pdo === null) {
+        $error = 'Password reset is temporarily unavailable. Please try again later.';
+    } else {
+      try {
+        $username = is_string($_POST['username'] ?? null) ? trim($_POST['username']) : '';
 
-    $stmt = $pdo->prepare('SELECT id, email FROM admin_users WHERE username = :u');
-    $stmt->execute(['u' => $username]);
-    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $pdo->prepare('SELECT id, email FROM admin_users WHERE username = :u');
+        $stmt->execute(['u' => $username]);
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Always show the same message whether or not the account exists —
-    // this stops someone from using this form to guess valid usernames.
-    $message = 'If that account exists and has a registered email, a reset link has been sent to it.';
+        // Keep the response independent of whether an account exists.
+        $message = 'If that account exists and has a registered email, a reset link will be sent to it.';
 
-    if ($admin && !empty($admin['email'])) {
-      $mailConfig = getSchoolMailConfig();
-      $baseUrl = trim((string) getenv('IMARIKA_BASE_URL'));
+        if ($admin && !empty($admin['email'])) {
+          $mailConfig = getSchoolMailConfig();
+          $baseUrl = trim((string) getenv('IMARIKA_BASE_URL'));
 
-      if ($mailConfig === null || filter_var($baseUrl, FILTER_VALIDATE_URL) === false) {
-        error_log('Password reset: mail settings or IMARIKA_BASE_URL are not configured.');
-      } else {
-        $token = bin2hex(random_bytes(32));
-        $expires = date('Y-m-d H:i:s', time() + 3600);
-        $pdo->prepare('UPDATE admin_users SET reset_token = :t, reset_expires = :e WHERE id = :id')
-          ->execute(['t' => $token, 'e' => $expires, 'id' => $admin['id']]);
+          if ($mailConfig === null || filter_var($baseUrl, FILTER_VALIDATE_URL) === false) {
+            error_log('Password reset: mail settings or IMARIKA_BASE_URL are not configured.');
+          } else {
+            $token = bin2hex(random_bytes(32));
+            $expires = date('Y-m-d H:i:s', time() + 3600);
+            $pdo->prepare('UPDATE admin_users SET reset_token = :t, reset_expires = :e WHERE id = :id')
+              ->execute(['t' => $token, 'e' => $expires, 'id' => $admin['id']]);
 
-        $resetLink = rtrim($baseUrl, '/') . '/admin/reset-password.php?token=' . $token;
-        $mail = new PHPMailer(true);
-        try {
-          $mail->isSMTP();
-          $mail->Host = $mailConfig['host'];
-          $mail->SMTPAuth = true;
-          $mail->Username = $mailConfig['username'];
-          $mail->Password = $mailConfig['password'];
-          $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-          $mail->Port = $mailConfig['port'];
-          $mail->setFrom($mailConfig['from_email'], 'Imarika School Admin');
-          $mail->addAddress($admin['email']);
-          $mail->Subject = 'Admin Password Reset Request';
-          $mail->Body = "Someone requested a password reset for the Imarika School admin panel.\n\n"
-            . "If this was you, click the link below within the next hour:\n{$resetLink}\n\n"
-            . "If you didn't request this, you can ignore this email.";
-          $mail->send();
-        } catch (Exception $e) {
-          error_log('Password reset email failed: ' . $mail->ErrorInfo);
+            $resetLink = rtrim($baseUrl, '/') . '/admin/reset-password.php?token=' . $token;
+            $mail = new PHPMailer(true);
+            try {
+              $mail->isSMTP();
+              $mail->Host = $mailConfig['host'];
+              $mail->SMTPAuth = true;
+              $mail->Username = $mailConfig['username'];
+              $mail->Password = $mailConfig['password'];
+              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+              $mail->Port = $mailConfig['port'];
+              $mail->setFrom($mailConfig['from_email'], 'Imarika School Admin');
+              $mail->addAddress($admin['email']);
+              $mail->Subject = 'Admin Password Reset Request';
+              $mail->Body = "Someone requested a password reset for the Imarika School admin panel.\n\n"
+                . "If this was you, click the link below within the next hour:\n{$resetLink}\n\n"
+                . "If you didn't request this, you can ignore this email.";
+              $mail->send();
+            } catch (Exception $e) {
+              error_log('Password reset email failed: ' . $mail->ErrorInfo);
+            }
+          }
         }
-        }
+      } catch (PDOException $exception) {
+        error_log('Password reset request failed: ' . $exception->getMessage());
+        $error = 'Password reset is temporarily unavailable. Please try again later.';
+      }
     }
 }
 ?>
@@ -70,8 +79,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="admin.css?v=20261015-logo">
+  <link rel="stylesheet" href="../styles.css?v=20261016-responsive-perf1">
+  <link rel="stylesheet" href="admin.css?v=20261016-logout-color6">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">
@@ -79,6 +88,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && $pdo !== null) {
       <img src="../assets/images/Sise.png" alt="Imarika Pre-Primary School logo" style="display:block;margin:0 auto;height:48px"></div>
     <h1>Forgot Password</h1>
     <?php if ($message): ?><p class="admin-success"><?= htmlspecialchars($message) ?></p><?php endif; ?>
+    <?php if ($error): ?><p class="admin-error" role="alert"><?= htmlspecialchars($error) ?></p><?php endif; ?>
     <form method="POST" novalidate>
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required autofocus>

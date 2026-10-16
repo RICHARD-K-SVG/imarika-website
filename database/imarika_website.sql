@@ -137,19 +137,22 @@ ALTER TABLE `admin_users`
 -- Indexes for table `admissions`
 --
 ALTER TABLE `admissions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_admissions_submitted_at` (`submitted_at`);
 
 --
 -- Indexes for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_inquiries_submitted_at` (`submitted_at`);
 
 --
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_news_pinned_created_at` (`pinned`,`created_at`);
 
 --
 -- Indexes for table `site_stats`
