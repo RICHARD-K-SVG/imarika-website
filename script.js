@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initNavToggle() {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
+  const closeButton = links && links.querySelector('.nav-close');
   if (!toggle || !links) return;
 
   function closeMenu(returnFocus = false) {
@@ -25,6 +26,10 @@ function initNavToggle() {
     const isOpen = links.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
+
+  if (closeButton) {
+    closeButton.addEventListener('click', () => closeMenu(true));
+  }
 
   links.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu()));
   document.addEventListener('keydown', (event) => {
