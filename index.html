@@ -9,12 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261016-responsive-perf1">
-  <link rel="stylesheet" href="lang-switcher.css">
-  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="styles.css?v=20261019-perf2">
+  <link rel="stylesheet" href="lang-switcher.css?v=20261019-mobile-menu1">
+  <link rel="stylesheet" href="slider.css?v=20261019-a11y1">
   <link rel="stylesheet" href="visitor-counter.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content" data-i18n="skip_to_content">Skip to main content</a>
 
   <header class="site-header">
     <nav class="nav-wrap" aria-label="Primary">
@@ -22,9 +23,8 @@
         <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
         Imarika Pre-Primary School
       </a>
-      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+      <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation"><span class="nav-toggle-icon" aria-hidden="true"></span></button>
       <ul class="nav-links" id="primary-navigation">
-        <li class="nav-close-item"><button class="nav-close" type="button" aria-label="Close menu">&times;</button></li>
         <li><a href="index.html" aria-current="page" data-i18n="nav_home">Home</a></li>
         <li><a href="about.html" data-i18n="nav_about">About</a></li>
         <li><a href="programs.html" data-i18n="nav_programs">Programs</a></li>
@@ -43,7 +43,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <!-- A direct welcome and one clear next step help families orient themselves immediately. -->
     <section class="hero home-hero">
       <div class="container">
@@ -134,19 +134,19 @@
             <figure class="slide">
               <picture>
                 <source srcset="assets/images/gallery/Imarika4.webp" type="image/webp">
-                <img src="assets/images/gallery/Imarika4.jpg" alt="A young learner smiling during a classroom activity" width="1920" height="1280" loading="lazy">
+                <img src="assets/images/gallery/Imarika4-fallback.jpg" alt="A young learner smiling during a classroom activity" width="1920" height="1280" loading="lazy">
               </picture>
               <figcaption data-i18n="home_photo_1">Encouragement in the classroom</figcaption>
             </figure>
             <figure class="slide">
               <picture>
                 <source srcset="assets/images/gallery/Imarika5.webp" type="image/webp">
-                <img src="assets/images/gallery/Imarika5.jpg" alt="A learner smiling in the classroom" width="1920" height="1280" loading="lazy">
+                <img src="assets/images/gallery/Imarika5-fallback.jpg" alt="A learner smiling in the classroom" width="1920" height="1280" loading="lazy">
               </picture>
               <figcaption data-i18n="home_photo_2">Confident young learners</figcaption>
             </figure>
             <figure class="slide">
-              <img src="assets/images/gallery/Imarika6.jpg" alt="Students learning together at their desks" loading="lazy">
+              <img src="assets/images/gallery/Imarika6.jpg" alt="Students learning together at their desks" width="1024" height="683" loading="lazy">
               <figcaption data-i18n="home_photo_3">Learning alongside friends</figcaption>
             </figure>
           </div>
@@ -210,11 +210,11 @@
     <div class="container footer-copy">&copy; <span id="year"></span> <span data-i18n="footer_copyright">Imarika Pre-Primary School. All rights reserved.</span></div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20261019-perf2"></script>
   <script src="visitor-counter.js?v=20261016-session-cache1"></script>
-  <script src="slider.js"></script>
-  <script src="translations.js"></script>
-  <script src="lang.js"></script>
+  <script src="slider.js?v=20261019-perf2"></script>
+  <script src="translations.js?v=20261019-perf2"></script>
+  <script src="lang.js?v=20261019-perf2"></script>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

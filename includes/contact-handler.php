@@ -67,6 +67,8 @@ try {
     respond(false, 'We could not save your message right now. Please try again or contact the school by phone.');
 }
 
+$pdo = null;
+
 $mailConfig = getSchoolMailConfig();
 if ($mailConfig === null) {
     error_log('Contact form: SMTP notification is not configured; message was saved.');
@@ -84,6 +86,7 @@ try {
     $mail->Password   = $mailConfig['password'];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = $mailConfig['port'];
+    $mail->Timeout    = 10;
 
     // Recipients
     $mail->setFrom($mailConfig['from_email'], 'Imarika Pre-Primary School');

@@ -42,6 +42,19 @@
   .lang-btn { min-height: 44px; }
 }
 
+@media (max-width: 1120px) {
+  .nav-links > li:last-child {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding: 10px 0 max(10px, env(safe-area-inset-bottom));
+    background: #7A1B2E;
+  }
+  .nav-links > li:last-child .lang-switcher { margin: 0; }
+}
+
 @media (max-width: 360px) {
   .lang-btn { padding: 0 9px; font-size: 12px; }
 }

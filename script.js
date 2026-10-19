@@ -13,23 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
 function initNavToggle() {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
-  const closeButton = links && links.querySelector('.nav-close');
   if (!toggle || !links) return;
 
   function closeMenu(returnFocus = false) {
     links.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
     if (returnFocus) toggle.focus();
   }
 
   toggle.addEventListener('click', () => {
     const isOpen = links.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   });
-
-  if (closeButton) {
-    closeButton.addEventListener('click', () => closeMenu(true));
-  }
 
   links.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu()));
   document.addEventListener('keydown', (event) => {
@@ -155,7 +152,10 @@ function initContactForm() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (!submitButton || submitButton.disabled) return;
     const status = form.querySelector('.form-status');
+    submitButton.disabled = true;
     status.textContent = 'Submitting...';
     status.className = 'form-status';
 
@@ -178,6 +178,8 @@ function initContactForm() {
     } catch (err) {
       status.textContent = 'Could not submit message. Please try again later.';
       status.classList.add('error');
+    } finally {
+      submitButton.disabled = false;
     }
   });
 }

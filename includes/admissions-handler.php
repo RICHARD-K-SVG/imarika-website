@@ -74,6 +74,8 @@ if ($pdo !== null) {
     error_log('Admissions: database not configured — skipping DB storage, relying on email only.');
 }
 
+$pdo = null;
+
 // ---- 2. Email a notification copy (best-effort — doesn't block success) ----
 $mailConfig = getSchoolMailConfig();
 if ($mailConfig === null) {
@@ -88,6 +90,7 @@ if ($mailConfig === null) {
         $mail->Password = $mailConfig['password'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = $mailConfig['port'];
+        $mail->Timeout = 10;
         $mail->setFrom($mailConfig['from_email'], 'Imarika Pre-Primary School');
         $mail->addAddress($mailConfig['school_email']);
         if ($f['email'] !== '') {

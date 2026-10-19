@@ -5,6 +5,7 @@
 
 const translations = {
   en: {
+    skip_to_content: "Skip to main content",
     nav_home: "Home",
     nav_about: "About",
     nav_programs: "Programs",
@@ -77,6 +78,7 @@ const translations = {
   },
 
   sw: {
+    skip_to_content: "Ruka hadi maudhui makuu",
     nav_home: "Nyumbani",
     nav_about: "Kuhusu Sisi",
     nav_programs: "Mipango",

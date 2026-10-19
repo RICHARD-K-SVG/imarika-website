@@ -8,7 +8,11 @@
   const STORAGE_KEY = 'imarika_lang';
 
   function getSavedLanguage() {
-    return localStorage.getItem(STORAGE_KEY) || 'en';
+    try {
+      return localStorage.getItem(STORAGE_KEY) || 'en';
+    } catch {
+      return 'en';
+    }
   }
 
   function applyLanguage(lang) {
@@ -22,7 +26,11 @@
     });
 
     document.documentElement.lang = lang;
-    localStorage.setItem(STORAGE_KEY, lang);
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      // Language switching still works for this page when storage is blocked.
+    }
 
     document.querySelectorAll('.lang-btn').forEach((btn) => {
       btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');

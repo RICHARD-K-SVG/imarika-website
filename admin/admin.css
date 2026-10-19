@@ -909,6 +909,64 @@ input[type="reset"]:hover {
 .admin-dashboard-website-link,
 .admin-news-pagination a { border: 1px solid currentColor; }
 
+.admin-page-heading { margin-bottom: clamp(24px, 4vw, 38px); }
+.admin-record-search { margin-top: 28px; }
+.admin-record-search-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px 18px;
+  margin-bottom: 14px;
+}
+.admin-record-search-bar label {
+  grid-column: 1 / -1;
+  color: #39343a;
+  font-size: 14px;
+  font-weight: 600;
+}
+.admin-record-search-bar input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid #ded6d0;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--color-ink);
+  font: inherit;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.admin-record-search-bar input:focus {
+  border-color: var(--color-royal-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(36, 75, 123, 0.12);
+}
+.admin-record-search-count { margin: 0; color: #716970; font-size: 13px; white-space: nowrap; }
+.admin-responsive-records .admin-applications-table { min-width: 1080px; }
+.admin-responsive-records .admin-messages-table { min-width: 760px; }
+.admin-record-search-empty,
+.admin-empty-state {
+  padding: clamp(28px, 5vw, 46px) 20px;
+  border: 1px dashed #d9cec8;
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+}
+.admin-record-search-empty { margin: 0; color: #625b60; }
+.admin-empty-state { margin-top: 22px; }
+.admin-empty-state-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 14px;
+  place-items: center;
+  border-radius: 14px;
+  background: #f8edef;
+  color: var(--color-maroon);
+  font-size: 26px;
+}
+.admin-empty-state h2 { margin-bottom: 7px; color: #39343a; font-size: 20px; }
+.admin-empty-state p { margin: 0 auto; color: #716970; font-size: 14px; }
+
 @media (max-width: 768px) {
   .admin-dashboard-hero { min-height: 0; align-items: flex-start; flex-direction: column; gap: 22px; margin-bottom: 34px; }
   .admin-dashboard-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -938,6 +996,53 @@ input[type="reset"]:hover {
   .admin-news-table-wrap .admin-table tr:last-child { border-bottom: 0; }
   .admin-news-table-wrap .admin-table td { display: grid; grid-template-columns: minmax(90px, 0.35fr) minmax(0, 1fr); gap: 12px; align-items: center; padding: 8px 0; border-bottom: 0; }
   .admin-news-table-wrap .admin-table td::before { content: attr(data-label); color: #716970; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .admin-responsive-records { overflow: visible; border: 0; background: transparent; }
+  .admin-responsive-records .admin-table { min-width: 0; }
+  .admin-responsive-records .admin-table thead {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .admin-responsive-records .admin-table,
+  .admin-responsive-records .admin-table tbody,
+  .admin-responsive-records .admin-table tr,
+  .admin-responsive-records .admin-table td { display: block; width: 100%; }
+  .admin-responsive-records .admin-table tr {
+    margin-bottom: 14px;
+    padding: 10px 15px;
+    border: 1px solid #e8dfd9;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(48, 38, 40, 0.045);
+  }
+  .admin-responsive-records .admin-table tr:last-child { margin-bottom: 0; }
+  .admin-responsive-records .admin-table td {
+    display: grid;
+    grid-template-columns: minmax(82px, 0.34fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0ebe7;
+    overflow-wrap: anywhere;
+  }
+  .admin-responsive-records .admin-table td:last-child { border-bottom: 0; }
+  .admin-responsive-records .admin-table td::before {
+    content: attr(data-label);
+    color: #716970;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .admin-responsive-records .admin-inline-form { flex-wrap: wrap; }
+  .admin-responsive-records .admin-inline-form select { max-width: 100%; }
+  .admin-record-search-bar { grid-template-columns: minmax(0, 1fr); }
+  .admin-record-search-bar label { grid-column: auto; }
+  .admin-record-search-count { white-space: normal; }
   .admin-news-actions { min-width: 0; }
   .admin-news-actions,
   .admin-news-actions .admin-inline-form { flex-wrap: wrap; }
@@ -963,6 +1068,7 @@ input[type="reset"]:hover {
   .admin-dashboard-action { min-height: 82px; gap: 12px; padding: 14px; }
   .admin-dashboard-alert { margin-top: -16px; font-size: 13px; }
   .admin-news-main { padding-right: 16px; padding-left: 16px; }
+  .admin-main:not(.admin-dashboard-main):not(.admin-news-main) { padding-right: 16px; padding-left: 16px; }
   .admin-news-heading { gap: 16px; }
   .admin-news-create-link { width: 100%; }
   .admin-news-stats { gap: 10px; }

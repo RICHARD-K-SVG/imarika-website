@@ -99,3 +99,7 @@
   z-index: 2;
 }
 .slider-toggle:hover { background: var(--color-maroon); color: var(--color-white); }
+
+@media (prefers-reduced-motion: reduce) {
+  .slides { transition: none; }
+}

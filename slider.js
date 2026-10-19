@@ -1,9 +1,7 @@
 // ==========================================================================
 // Imarika School — homepage photo slider
-// Auto-plays on its own. Pauses while the mouse is over it or when a keyboard
-// user is focused on it, and has a Pause/Play button. If the visitor's device
-// is set to "reduce motion", it still rotates automatically but switches
-// images instantly instead of sliding.
+// Auto-plays when visible. Pauses while hovered or keyboard-focused and has a
+// Pause/Play button. Respects reduced-motion preferences by default.
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,13 +15,13 @@ function initSlider(slider) {
   const nextBtn = slider.querySelector('.next');
   const dotsBox = slider.querySelector('.slider-dots');
   const delay = parseInt(slider.dataset.autoplay, 10) || 5000;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduceMotion) track.style.transition = 'none';
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   let index = 0;
   let timer = null;
-  let userPaused = false;
+  let userPaused = motionPreference.matches;
+  let manuallyPaused = false;
+  let isInViewport = !('IntersectionObserver' in window);
 
   const dots = slides.map((_, i) => {
     const dot = document.createElement('button');
@@ -46,6 +44,7 @@ function initSlider(slider) {
   }
   toggle.addEventListener('click', () => {
     userPaused = !userPaused;
+    manuallyPaused = userPaused;
     if (userPaused) stop(); else start();
     paintToggle();
   });
@@ -59,11 +58,26 @@ function initSlider(slider) {
   }
 
   function start() {
-    if (timer || userPaused) return;
+    if (timer || userPaused || !isInViewport || document.hidden) return;
     timer = setInterval(() => goTo(index + 1), delay);
   }
   function stop() { clearInterval(timer); timer = null; }
   function restart() { stop(); start(); }
+
+  motionPreference.addEventListener('change', (event) => {
+    if (manuallyPaused) return;
+    userPaused = event.matches;
+    if (userPaused) stop(); else start();
+    paintToggle();
+  });
+
+  if ('IntersectionObserver' in window) {
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isInViewport = entry.isIntersecting;
+      if (isInViewport) start(); else stop();
+    });
+    visibilityObserver.observe(slider);
+  }
 
   prevBtn.addEventListener('click', () => { goTo(index - 1); restart(); });
   nextBtn.addEventListener('click', () => { goTo(index + 1); restart(); });
@@ -73,7 +87,9 @@ function initSlider(slider) {
   // Only pause for keyboard focus, not after a mouse click on a button
   slider.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) stop(); });
   slider.addEventListener('focusout', start);
-  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
+  });
 
   slider.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') { goTo(index - 1); restart(); }
