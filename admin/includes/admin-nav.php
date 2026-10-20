@@ -8,7 +8,7 @@ function navActive(string $file, string $current): string {
 ?>
 <header class="admin-header">
   <div class="admin-header-inner">
-    <span class="admin-brand"><img src="../assets/images/Sise.png" alt="Imarika Pre-Primary School logo">Imarika Pre-Primary School Admin</span>
+    <span class="admin-brand"><img src="../assets/images/Sise-160.png" alt="Imarika Pre-Primary School logo" width="160" height="160">Imarika Pre-Primary School Admin</span>
     <button class="admin-nav-toggle" type="button" aria-label="Open admin menu" aria-expanded="false" aria-controls="admin-navigation">
       <span class="admin-nav-toggle-icon" aria-hidden="true"></span>
     </button>

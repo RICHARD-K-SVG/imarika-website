@@ -56,8 +56,8 @@ if ($pdo === null) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20261016-responsive-perf1">
-  <link rel="stylesheet" href="admin.css?v=20261019-records1">
+  <link rel="stylesheet" href="../styles.css?v=20261020-responsive-perf1">
+  <link rel="stylesheet" href="admin.css?v=20261020-responsive-perf1">
   <script src="admin-record-search.js?v=20261019-records1" defer></script>
 </head>
 <body>

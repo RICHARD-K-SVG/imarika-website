@@ -140,7 +140,7 @@ All 6 pages sit one click from Home via the persistent nav. Logo and "Apply Now"
 3. **Real photography** — Gallery tiles are generated placeholders; soft target of 30 days post-launch to swap in real photos.
 4. **PHPMailer install** — run `composer require phpmailer/phpmailer` inside `includes/` before the contact form can send mail. See `includes/vendor/README.md`.
 5. **Database credentials** — set `IMARIKA_DB_HOST`, `IMARIKA_DB_NAME`, `IMARIKA_DB_USER`, and `IMARIKA_DB_PASSWORD` in the PHP server environment. `IMARIKA_DB_PORT` is optional and defaults to `3307`. Use a dedicated, least-privileged database account with a non-empty password; never use MySQL `root`.
-6. **SMTP / email credentials** — set `IMARIKA_SMTP_HOST`, `IMARIKA_SMTP_USERNAME`, `IMARIKA_SMTP_PASSWORD`, `IMARIKA_SMTP_PORT`, `IMARIKA_SCHOOL_EMAIL`, and `IMARIKA_FROM_EMAIL` in the PHP server environment. Set `IMARIKA_BASE_URL` to the public site URL for password-reset links. Do not put mail credentials in page source.
+6. **SMTP / email credentials** — set `IMARIKA_SMTP_HOST`, `IMARIKA_SMTP_USERNAME`, `IMARIKA_SMTP_PASSWORD`, `IMARIKA_SCHOOL_EMAIL`, and `IMARIKA_FROM_EMAIL` in the PHP server environment. `IMARIKA_SMTP_PORT` is optional and defaults to `587` (STARTTLS). Set `IMARIKA_BASE_URL` to the public site URL for password-reset links. Do not put mail credentials in page source.
 7. **Section 9 enhancements** (optional, not committed scope) — trust-signal section, WhatsApp click-to-chat, Swahili/English toggle, staff/teacher-ratio note, favicon + OG image, Admissions FAQ block.
 8. **Maintenance ownership** — who updates the Gallery and checks the contact form inbox post-launch (not yet assigned).
 

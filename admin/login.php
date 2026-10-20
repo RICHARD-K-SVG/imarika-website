@@ -52,17 +52,17 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login | Imarika Pre-Primary School</title>
-    <link rel="icon" type="image/png" href="../assets/images/Sise.png">
+    <link rel="icon" type="image/png" href="../assets/images/Sise-160.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20261016-responsive-perf1">
-  <link rel="stylesheet" href="admin.css?v=20261016-logout-color6">
+  <link rel="stylesheet" href="../styles.css?v=20261020-responsive-perf1">
+  <link rel="stylesheet" href="admin.css?v=20261020-responsive-perf1">
 </head>
 <body class="admin-login-body">
   <div class="admin-login-card">
     <div style="text-align:center;margin-bottom:var(--space-2)">
-        <img src="../assets/images/Sise.png" alt="Imarika Pre-Primary School logo" style="display:block;margin:0 auto;height:48px"></div>
+        <img src="../assets/images/Sise-160.png" alt="Imarika Pre-Primary School logo" width="160" height="160" style="display:block;margin:0 auto;height:48px;width:48px"></div>
     <h1>Admin Login</h1>
     <?php if ($error): ?><p class="admin-error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
     <form method="POST" novalidate>

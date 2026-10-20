@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | Imarika Pre-Primary School</title>
   <meta name="description" content="See everyday learning and school moments at Imarika Pre-Primary School in Iyumbu, Dodoma.">
-  <link rel="icon" type="image/png" href="assets/images/Sise.png">
+  <link rel="icon" type="image/png" href="assets/images/Sise-160.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020-cookie-consent1">
+  <link rel="stylesheet" href="styles.css?v=20261020-responsive-perf1">
   <link rel="stylesheet" href="gallery-lightbox.css">
   <link rel="stylesheet" href="lang-switcher.css?v=20261019-mobile-menu1">
   <link rel="stylesheet" href="visitor-counter.css">
@@ -20,7 +20,7 @@
   <header class="site-header">
     <nav class="nav-wrap" aria-label="Primary">
       <a href="index.html" class="logo">
-        <img src="assets/images/Sise.png" alt="Imarika Pre-Primary School logo">
+        <img src="assets/images/Sise-160.png" alt="Imarika Pre-Primary School logo" width="160" height="160">
         Imarika Pre-Primary School
       </a>
       <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation"><span class="nav-toggle-icon" aria-hidden="true"></span></button>
@@ -57,19 +57,28 @@
         <div class="gallery-grid">
           <figure class="gallery-card">
             <button class="gallery-item" type="button" aria-label="View photo: learners taking part in a classroom activity">
-              <img src="assets/images/gallery/Imarika1.jpg" alt="Learners taking part in a classroom activity" width="800" height="600" loading="eager" fetchpriority="high">
+              <picture>
+                <source srcset="assets/images/gallery/Imarika1.webp" type="image/webp">
+                <img src="assets/images/gallery/Imarika1.jpg" alt="Learners taking part in a classroom activity" width="1024" height="1024" loading="eager" fetchpriority="high">
+              </picture>
             </button>
             <figcaption>Learning together</figcaption>
           </figure>
           <figure class="gallery-card">
             <button class="gallery-item" type="button" aria-label="View photo: a moment from school life">
-              <img src="assets/images/gallery/Imarika2.jpg" alt="Children sharing a moment at school" width="800" height="600" loading="lazy">
+              <picture>
+                <source srcset="assets/images/gallery/Imarika2.webp" type="image/webp">
+                <img src="assets/images/gallery/Imarika2.jpg" alt="Children sharing a moment at school" width="1024" height="683" loading="lazy" decoding="async">
+              </picture>
             </button>
             <figcaption>Growing in community</figcaption>
           </figure>
           <figure class="gallery-card">
             <button class="gallery-item" type="button" aria-label="View photo: a learner working on a puzzle">
-              <img src="assets/images/gallery/Imarika3.jpg" alt="A learner concentrating on a classroom puzzle" width="800" height="600" loading="lazy">
+              <picture>
+                <source srcset="assets/images/gallery/Imarika3.webp" type="image/webp">
+                <img src="assets/images/gallery/Imarika3.jpg" alt="A learner concentrating on a classroom puzzle" width="1024" height="577" loading="lazy" decoding="async">
+              </picture>
             </button>
             <figcaption>Hands-on practice</figcaption>
           </figure>
@@ -93,7 +102,10 @@
           </figure>
           <figure class="gallery-card">
             <button class="gallery-item" type="button" aria-label="View photo: students learning at their desks">
-              <img src="assets/images/gallery/Imarika6.jpg" alt="Students learning together at their desks" width="800" height="600" loading="lazy">
+              <picture>
+                <source srcset="assets/images/gallery/Imarika6.webp" type="image/webp">
+                <img src="assets/images/gallery/Imarika6.jpg" alt="Students learning together at their desks" width="1024" height="683" loading="lazy" decoding="async">
+              </picture>
             </button>
             <figcaption>Learning alongside friends</figcaption>
           </figure>
@@ -113,7 +125,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <div class="logo"><img src="assets/images/Sise.png" alt="Imarika School logo">Imarika Pre-Primary School</div>
+        <div class="logo"><img src="assets/images/Sise-160.png" alt="Imarika School logo" width="160" height="160" loading="lazy" decoding="async">Imarika Pre-Primary School</div>
         <ul class="footer-contact"> 
           <li> <svg viewBox="0 0 24 24" aria-hidden="true">
                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>

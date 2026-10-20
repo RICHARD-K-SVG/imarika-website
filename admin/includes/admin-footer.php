@@ -2,7 +2,7 @@
   <div class="admin-footer-main">
     <div class="admin-footer-contact">
       <a class="admin-footer-brand" href="../index.html">
-        <img src="../assets/images/Sise.png" alt="">
+        <img src="../assets/images/Sise-160.png" alt="" width="160" height="160" loading="lazy" decoding="async">
         <span>Imarika Pre-Primary School</span>
       </a>
       <ul class="admin-footer-details">

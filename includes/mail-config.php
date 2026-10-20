@@ -7,21 +7,35 @@
 function getSchoolMailConfig(): ?array
 {
     $config = [
-        'host' => trim((string) getenv('sandbox.smtp.mailtrap.io')),
-        'username' => trim((string) getenv('0e658f9e03b9b2')),
-        'password' => (string) getenv('a4e9ecd10d1de6'),
-        'school_email' => trim((string) getenv('imarikapreprimaryschool@gmail.com')),
-        'from_email' => trim((string) getenv('imarikapreprimaryschool@gmail.com')),
+        'host' => trim((string) getenv('IMARIKA_SMTP_HOST')),
+        'username' => trim((string) getenv('IMARIKA_SMTP_USERNAME')),
+        'password' => (string) getenv('IMARIKA_SMTP_PASSWORD'),
+        'school_email' => trim((string) getenv('IMARIKA_SCHOOL_EMAIL')),
+        'from_email' => trim((string) getenv('IMARIKA_FROM_EMAIL')),
     ];
 
     foreach ($config as $value) {
         if ($value === '') {
+            error_log('SMTP configuration skipped: required mail environment variables are missing.');
             return null;
         }
     }
 
-    $port = filter_var(getenv('IMARIKA_SMTP_PORT'), FILTER_VALIDATE_INT);
-    $config['port'] = $port !== false && $port > 0 ? $port : 587;
+    if (filter_var($config['school_email'], FILTER_VALIDATE_EMAIL) === false
+        || filter_var($config['from_email'], FILTER_VALIDATE_EMAIL) === false) {
+        error_log('SMTP configuration skipped: school or sender email address is invalid.');
+        return null;
+    }
+
+    $portValue = getenv('IMARIKA_SMTP_PORT');
+    $port = $portValue === false || $portValue === ''
+        ? 587
+        : filter_var($portValue, FILTER_VALIDATE_INT);
+    if ($port === false || $port < 1 || $port > 65535) {
+        error_log('SMTP configuration skipped: IMARIKA_SMTP_PORT must be a valid TCP port.');
+        return null;
+    }
+    $config['port'] = $port;
 
     return $config;
 }
