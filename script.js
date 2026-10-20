@@ -7,7 +7,42 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initGalleryLightbox();
   initContactForm();
+  initCookieConsent();
 });
+
+/* ---- Cookie consent banner ---- */
+function initCookieConsent() {
+  const storageKey = 'imarika_cookie_consent';
+
+  try {
+    if (localStorage.getItem(storageKey)) return;
+  } catch (error) {
+    console.error('Could not read cookie consent from localStorage.', error);
+  }
+
+  const banner = document.createElement('aside');
+  banner.className = 'cookie-consent';
+  banner.setAttribute('aria-label', 'Cookie consent');
+  banner.innerHTML = `
+    <p class="cookie-consent-message">We use cookies to improve your experience. By using our site, you agree to our use of cookies.</p>
+    <div class="cookie-consent-actions">
+      <button class="cookie-consent-accept" type="button">Accept All</button>
+      <button class="cookie-consent-decline" type="button">Decline</button>
+    </div>
+  `;
+  document.body.append(banner);
+
+  banner.querySelectorAll('button').forEach((button) => {
+    button.addEventListener('click', () => {
+      try {
+        localStorage.setItem(storageKey, button.classList.contains('cookie-consent-accept') ? 'accepted' : 'declined');
+      } catch (error) {
+        console.error('Could not save cookie consent to localStorage.', error);
+      }
+      banner.remove();
+    });
+  });
+}
 
 /* ---- Mobile nav toggle ---- */
 function initNavToggle() {

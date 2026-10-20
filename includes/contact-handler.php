@@ -72,7 +72,7 @@ $pdo = null;
 $mailConfig = getSchoolMailConfig();
 if ($mailConfig === null) {
     error_log('Contact form: SMTP notification is not configured; message was saved.');
-    respond(true, 'Your message has been received and saved.');
+    respond(true, 'Your message has been submitted successfully.');
 }
 
 $mail = new PHPMailer(true);
@@ -106,8 +106,8 @@ try {
 
     $mail->send();
 
-    respond(true, 'Your message has been received and saved.');
+    respond(true, 'Your message has been submitted successfully.');
 } catch (Exception $e) {
     error_log('Mailer Error: ' . $mail->ErrorInfo);
-    respond(true, 'Your message has been received and saved.');
+    respond(true, 'Your message has been submitted successfully.');
 }

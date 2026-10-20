@@ -6,8 +6,7 @@
  * JSON, newest first (pinned posts first, then by date). news.js calls
  * this with a plain GET fetch() and renders the results client-side.
  *
- * Requires db-config.php's real credentials to be filled in (see the
- * CHANGE_ME placeholders left over from the contact form setup).
+ * Requires the database connection variables from the PHP server environment.
  * -----------------------------------------------------------------------
  */
 
@@ -21,7 +20,7 @@ if ($pdo === null) {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Database is not configured yet. Update includes/db-config.php with real credentials.',
+        'message' => 'Database is not configured yet.',
     ]);
     exit;
 }
